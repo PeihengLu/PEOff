@@ -154,21 +154,17 @@ class CrispAI_pi(nn.Module):
             output_dense_out_channels = out_features
             
 
-    def forward(self, x):
+    def forward(self, x_seq, x_pi):
 
         '''
         Forward pass of crispAI model
-            - x: input sequence (batch_size, seq_len, channels)
-            - last self.pi_encoding_channels channels are physical features
+            - x_seq: (batch_size, seq_len, seq_encoding_channels)
+            - x_pi: (batch_size, seq_len, pi_encoding_channels)
             - output: (batch_size, output_dense[-1])
             - sequence features: stacked conv1d + lstm
             - pi features: conv1d
             - fusion features: concat(sequence features, pi features)
         '''
-
-        x_seq = x[:, :, :-self.pi_encoding_channels]
-        x_pi = x[:, :, -self.pi_encoding_channels:]
-
         x_seq = x_seq.permute(0, 2, 1)
         x_pi = x_pi.permute(0, 2, 1)
         

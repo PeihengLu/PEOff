@@ -1,0 +1,33 @@
+\documentclass[a4,12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[sorting=none]{biblatex}
+\usepackage{hyperref}
+\usepackage{graphicx}
+% limit page margin
+\usepackage[margin=1.2in]{geometry}
+
+\addbibresource{reference.bib}
+\title{Proposal for PhD Research: Quantifying the Uncertainty in both On and Off-target Activity of Prime Editing}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+My previous work on the master's thesis focused on the on target prediction of prime editing efficiency, however, the off-target activity of prime editing is still a major concern. 
+
+With the recent development of a number of off-target site detection protocols supporting prime editors, it is now possible to quantify their off target activity using big data and deep learning techniques\parencite{liangGenomewideProfilingPrime2023,
+zhuTrackingseqRevealsHeterogeneity2024}.
+
+Although majority of the existing solution (including my master's thesis) was aiming at producing a point estimation as the predicted editing efficiency\parencite{mathisMachineLearningPrediction2024,yuPredictionEfficienciesDiverse2023,koeppelPredictionPrimeEditing2023}, prime editing itself must be viewed as a stochastic process due to the physical complexity of the molecular interactions involved. Thus, instead of producing a point estimation, it could be more informative to model the posterior distribution of the activity of prime editing given the target loci and pegRNA sequence.
+
+A reasonable starting point would be to investigate 
+
+Some preliminary study has been done on the  
+
+MC dropout/Deep ensemble
+
+\printbibliography
+
+\end{document}
