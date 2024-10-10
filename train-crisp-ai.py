@@ -15,20 +15,24 @@ class ZeroInflatedNegativeBinomial(torch.nn.Module):
     def __init__(self, eps=1e-6):
         super(ZeroInflatedNegativeBinomial, self).__init__()
         self.eps = eps
+
+    def negative_binomial(self, y, mu, theta):
+        return (torch.lgamma(y + theta) / torch.lgamma(theta)) * (theta / (theta + mu)) ** theta * (mu / (theta + mu)) ** y 
         
     def forward(self, y_pred, y_true):
         y_pred = torch.clamp(y_pred, min=self.eps)
         
-        mu = y_pred[:, 0]
-        theta = y_pred[:, 1]
-        
+        pi = y_pred[:, 0]
+        mu = y_pred[:, 1]
+        theta = y_pred[:, 2]
+
         y = y_true
-        
-        p = theta / (theta + mu)
-        q = mu / (theta + mu)
-        
-        log_prob = torch.log(p + (1 - p) * torch.pow(q, y))
-        return -log_prob.mean()
+
+        # mixture of zero and negative binomial
+        zero = torch.log(pi + self.eps) + torch.log(1 + torch.exp(-mu))
+        non_zero = torch.log(1 - pi + self.eps) + torch.log(self.negative_binomial(y, mu, theta) + self.eps)
+
+        return -torch.mean(zero * (y == 0).float() + non_zero * (y > 0).float())
 
 @dataclass
 class TrainingConfig:
@@ -88,11 +92,11 @@ def train_crispAI(training_config: TrainingConfig, X_trains: Dict[int, Dict[str,
         
     return net
 
-def preprocess_data(data: str) -> Tuple[Dict[int, Dict[str, torch.Tensor]], Dict[int, torch.Tensor]]:
+def preprocess_data(data: pd.DataFrame) -> Tuple[Dict[int, Dict[str, torch.Tensor]], Dict[int, torch.Tensor]]:
     """preprocess data for crispAI model
 
     Args:
-        data (str): path to data
+        data (pd.DataFrame): data with all required columns
         
     Returns:
         Tuple[Dict[int, Dict[str, torch.Tensor]], Dict[int, torch.Tensor]: training data and labels
@@ -101,3 +105,4 @@ def preprocess_data(data: str) -> Tuple[Dict[int, Dict[str, torch.Tensor]], Dict
     df = pd.read_csv(data)
     
     # split the data into folds and test data 
+    
