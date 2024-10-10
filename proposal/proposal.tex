@@ -8,7 +8,8 @@
 \usepackage[margin=1.2in]{geometry}
 
 \addbibresource{reference.bib}
-\title{Proposal for PhD Research: Quantifying the Uncertainty in both On and Off-target Activity of Prime Editing}
+\title{Proposal for PhD Research: 
+Quantifying the Uncertainty in both On and Off-target Activity of Prime Editing}
 \author{}
 \date{}
 
@@ -20,13 +21,16 @@ My previous work on the master's thesis focused on the on target prediction of p
 With the recent development of a number of off-target site detection protocols supporting prime editors, it is now possible to quantify their off target activity using big data and deep learning techniques\parencite{liangGenomewideProfilingPrime2023,
 zhuTrackingseqRevealsHeterogeneity2024}.
 
-Although majority of the existing solution (including my master's thesis) was aiming at producing a point estimation as the predicted editing efficiency\parencite{mathisMachineLearningPrediction2024,yuPredictionEfficienciesDiverse2023,koeppelPredictionPrimeEditing2023}, prime editing itself must be viewed as a stochastic process due to the physical complexity of the molecular interactions involved. Thus, instead of producing a point estimation, it could be more informative to model the posterior distribution of the activity of prime editing given the target loci and pegRNA sequence.
+Although majority of the existing solution (including my master's thesis) was aiming at producing a point estimation as the predicted editing efficiency\parencite{mathisMachineLearningPrediction2024,yuPredictionEfficienciesDiverse2023,koeppelPredictionPrimeEditing2023}, the prime editing process itself can be viewed as a stochastic process due to the complexity of the physical processes involved. Thus, it could be more informative to model the posterior distribution of the activity of prime editing given the target loci and pegRNA sequence.
 
 A reasonable starting point would be to investigate 
 
-Some preliminary study has been done on the  
+To validate this idea, I conducted some preliminary experiments on the on-target prediction of prime editing efficiency using the mathis et al's 90k PE2 HEK293T dataset\parencite{mathisPredictingPrimeEditing2023}.
 
-MC dropout/Deep ensemble
+
+Additional models including MC dropout/Deep ensemble
+
+Thus, with the on and off target activity of prime editing quantified, we can provide a complete overview of the outcome of using a specific pegRNA sequence on a specific target loci. 
 
 \printbibliography
 
