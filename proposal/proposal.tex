@@ -4,17 +4,22 @@
 \usepackage[sorting=none]{biblatex}
 \usepackage{hyperref}
 \usepackage{graphicx}
+\usepackage{subcaption}
 % limit page margin
 \usepackage[margin=1.2in]{geometry}
 
 \addbibresource{reference.bib}
+\graphicspath{{../figures/}}
 \title{Proposal for PhD Research: 
 Quantifying the Uncertainty in both On and Off-target Activity of Prime Editing}
 \author{}
 \date{}
 
 \begin{document}
+
 \maketitle
+
+Prime editing is a novel editing 
 
 My previous work on the master's thesis focused on the on target prediction of prime editing efficiency, however, the off-target activity of prime editing is still a major concern. 
 
@@ -31,6 +36,14 @@ To validate this idea, I conducted some preliminary experiments on the on-target
 Additional models including MC dropout/Deep ensemble
 
 Thus, with the on and off target activity of prime editing quantified, we can provide a complete overview of the outcome of using a specific pegRNA sequence on a specific target loci. 
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.3\textwidth}
+        \includegraphics[width=\textwidth]{efficiency_distribution.png}
+        \caption{Distribution of measured editing efficiency}
+    \end{subfigure}
+\end{figure}
 
 \printbibliography
 
