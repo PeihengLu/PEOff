@@ -37,7 +37,6 @@ def bp_wise_NucleotideBDM(seq, bdm, nuc_dict):
     out = ','.join(map(str, out))
     return out
 
-
 def gc_content_flank(flank_size, sequence):
     'returns the GC content of the given sequence for each position. Each position is the center of a window of size flank_size bp flank_size on each side' 
     gc_content = []

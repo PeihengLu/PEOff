@@ -8,7 +8,6 @@ import pandas as pd
 
 from crispAI.crispAI_score.model import CrispAI_pi, ModelConfig
 
-
 config = ModelConfig()
 
 class ZeroInflatedNegativeBinomial(torch.nn.Module):
@@ -49,8 +48,8 @@ class TrainingConfig:
     patience: int = 5
     use_checkpoint: bool = True
     f_params: str = 'model_params.pt'
-    f_history: str = 'model_history.json'
-    f_criteria: str = 'model_criteria.json'
+    f_history: str = None
+    f_criteria: str = None
     f_best: str = 'model_best.pt'
     
     # device
@@ -89,6 +88,9 @@ def train_crispAI(training_config: TrainingConfig, X_trains: Dict[int, Dict[str,
         train_split=None,
         verbose=0
     )
+    
+    # cross validation
+    
         
     return net
 
@@ -100,9 +102,7 @@ def preprocess_data(data: pd.DataFrame) -> Tuple[Dict[int, Dict[str, torch.Tenso
         
     Returns:
         Tuple[Dict[int, Dict[str, torch.Tensor]], Dict[int, torch.Tensor]: training data and labels
-    """
-    # load the csv data
-    df = pd.read_csv(data)
-    
+    """    
     # split the data into folds and test data 
+    
     
