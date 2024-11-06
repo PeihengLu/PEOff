@@ -12,7 +12,7 @@
 \graphicspath{{../figures/}}
 \title{Proposal for PhD Research: 
 Quantifying the Uncertainty in both On and Off-target Activity of Prime Editing}
-\author{}
+\author{Peiheng Lu}
 \date{}
 
 \begin{document}
@@ -31,15 +31,15 @@ A number of off-target prediction tools have been developed for CRISPR-Cas9, whi
 
 On top of extending the model to predict the off-target activity of prime editing, I propose to modify the models to output the probability distribution of the editing efficiency, rather than a point estimation.
 
-Although majority of the existing solution (including my master's thesis) was aiming at producing a point estimation as the predicted editing efficiency\parencite{mathisMachineLearningPrediction2024,yuPredictionEfficienciesDiverse2023,koeppelPredictionPrimeEditing2023}, the prime editing process itself can be viewed as a stochastic process due to the complexity of the physical processes involved. Thus, it could be more informative to model the posterior distribution of the activity of prime editing given the target loci and pegRNA sequence. For examples, researchers may be able to select the pegRNA sequence that has lower variance in the predicted editing efficiency, if multiple guides showed similar mean editing efficiency.
+Although majority of the existing solution (including my master's thesis) was aiming at producing a point estimation as the predicted editing efficiency\parencite{mathisMachineLearningPrediction2024,yuPredictionEfficienciesDiverse2023,koeppelPredictionPrimeEditing2023}, the energy-driven binding and cleavage processes are stochastic in nature\cite{stortzPiCRISPRPhysicallyInformed2023}. Thus, it could be more informative to model the posterior distribution of the activity of prime editing given the target loci and pegRNA sequence. An example benefit would be allowing researchers to select the guide design that has smaller variance in editing outcome, if multiple guides showed similar mean editing efficiency.
 
-Recently, a probabilistic deep learning model, crispAI, was proposed to fit a zero inflated negative binomial distribution to the off-target activity of CRISPR-Cas9 on each potential target site\parencite{ozdenLearningQuantifyUncertainty2024}. It was able to accuracy predict the off-target activity in both minimal activity and high activity sites ....
+Recently, a probabilistic deep learning model, crispAI, was proposed to fit a zero inflated negative binomial distribution to the off-target activity of CRISPR-Cas9 on each potential target site\parencite{ozdenLearningQuantifyUncertainty2024}. It was able to accuracy predict the off-target activity in both minimal activity and high activity sites .....
 
 To validate the probabilistic approach, I conducted some preliminary experiments on the on-target prediction of prime editing efficiency using the mathis et al's 90k PE2 HEK293T dataset\parencite{mathisPredictingPrimeEditing2023}. 
 
 (Add details of the experiment and results)
 
-Additional models including MC dropout/Deep ensemble
+Additional methods including Monte Carlo dropout\parencite{galDropoutBayesianApproximation2016}/Deep ensemble can also be relatively easily applied to gauge the confidence of the model's prediction.
 
 
 \begin{figure}

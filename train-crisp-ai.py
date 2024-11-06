@@ -89,8 +89,11 @@ def train_crispAI(training_config: TrainingConfig, X_trains: Dict[int, Dict[str,
         verbose=0
     )
     
-    # cross validation
-    
+    # cross validation with each fold
+    # for ...
+        # train the model
+
+        # output the live performance 
         
     return net
 
@@ -103,6 +106,29 @@ def preprocess_data(data: pd.DataFrame) -> Tuple[Dict[int, Dict[str, torch.Tenso
     Returns:
         Tuple[Dict[int, Dict[str, torch.Tensor]], Dict[int, torch.Tensor]: training data and labels
     """    
-    # split the data into folds and test data 
-    
-    
+    # TODO: split the data into folds and test data 
+
+
+    # dictionaries to store the training data and labels for each fold
+
+
+    # for each fold:
+
+        # one hot encode the target and sgRNA sequence
+
+
+        # element wise OR between the target and sgRNA sequence
+
+
+        # the final two dimensions indicating mismatch direction is unused here (because there are only perfect matches), so add two dummy rows of zeros
+
+
+        # load the Nucleotide BDM score, GC content, NuPoP occupancy score, and NuPoP affinity scores
+
+
+        # store the data into a dictionary with two keys: 'X_nucl' and 'X_pi'
+        # 'X_nucl' contains the encoded sequence data
+        # 'X_pi' contains the physical descriptors
+
+
+    # return the training data and labels
