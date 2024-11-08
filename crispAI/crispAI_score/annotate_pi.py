@@ -85,7 +85,7 @@ def get_surrounding_sequence_from_row(row, genome, flank, chrom_col, start_col, 
         return get_surrounding_sequence(row[chrom_col], row[start_col], row[end_col]+ 1, row[strand_col], genome, flank)
     
 
-def annotation_pipeline(offtarget_data):
+def annotation_pipeline(offtarget_data: pd.DataFrame) -> pd.DataFrame:
     import genomepy # TODO:add other reference versions
     from pybdm import BDM
 
@@ -96,7 +96,7 @@ def annotation_pipeline(offtarget_data):
     start_col = 'start'
     end_col = 'end'
     strand_col = 'strand'
-    reads_col = 'reads'
+    # reads_col = 'reads'
     offtarget_sequence_col = 'target_sequence'
     target_sequence_col = 'sgRNA_sequence'
 
