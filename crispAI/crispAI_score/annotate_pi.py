@@ -102,6 +102,20 @@ def annotation_pipeline(offtarget_data: pd.DataFrame) -> pd.DataFrame:
 
     offtarget_data['context sequence flank_73'] = offtarget_data.apply(lambda row: get_surrounding_sequence_from_row(row, g, flank=73, chrom_col= chrom_col, start_col=start_col, end_col=end_col, strand_col=strand_col), axis=1)
 
+    sgRNA_in_context = [context.find(sgRNA) for sgRNA, context in zip(offtarget_data['sgRNA_sequence'], offtarget_data['context sequence flank_73'])]
+    print(sgRNA_in_context)
+    offtarget_data['sgRNA_in_context'] = sgRNA_in_context
+    offtarget_data['sgRNA_in_context_offset'] = 72 - offtarget_data['sgRNA_in_context']
+    # align sgRNA in the middle of the context sequence
+    offtarget_data.loc[offtarget_data['strand'] == '+', start_col] = offtarget_data[start_col] - offtarget_data['sgRNA_in_context_offset']
+    offtarget_data.loc[offtarget_data['strand'] == '-', start_col] = offtarget_data[start_col] + offtarget_data['sgRNA_in_context_offset']
+    offtarget_data[end_col] = offtarget_data[start_col] + 22
+
+    # remove sgRNA_in_context_offset and sgRNA_in_context columns
+    offtarget_data.drop(columns=['sgRNA_in_context_offset', 'sgRNA_in_context'], inplace=True)
+    # rerun get_surrounding_sequence_from_row
+    offtarget_data['context sequence flank_73'] = offtarget_data.apply(lambda row: get_surrounding_sequence_from_row(row, g, flank=73, chrom_col= chrom_col, start_col=start_col, end_col=end_col, strand_col=strand_col), axis=1)
+
     print('Flank sequences generated from GRCh38')
 
     # NuPoP occupancy and affinity annotations (R script runs)
@@ -122,7 +136,8 @@ def annotation_pipeline(offtarget_data: pd.DataFrame) -> pd.DataFrame:
                 f.write('>' + chrom_ + '\n')
                 f.write(context_sequence_flank_73_)
 
-            except:
+            except Exception as e:
+                print(e)
                 pass
     
     nupop_output_dir = './nupop_output_temp/'
@@ -145,19 +160,21 @@ def annotation_pipeline(offtarget_data: pd.DataFrame) -> pd.DataFrame:
 
     # run nupop.R
     os.system('Rscript nupop.R > /dev/null 2>&1')
+    print(pwd)
     os.chdir(pwd)
 
     # read every file in the directory with '.txt' extension in nupop_output_temp/
     files = [f for f in os.listdir('./nupop_input_temp/') if f.endswith('.seq')]
     len_files = len(files)
     occupancies, affinities = [], []
+    
     for i in range(1, len_files+1):
         try:
             occ, aff = read_nupop_output(nupop_output_dir, i)
             occupancies.append(occ)
             affinities.append(aff)
-        except:
-            # print(i)
+        except Exception as e:
+            print(e)
             occupancies.append('NA')
             affinities.append('NA')
     
