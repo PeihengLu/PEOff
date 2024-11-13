@@ -1,3 +1,2 @@
 cyvcf2
 genebe
-data = EnsemblRelease(77)
