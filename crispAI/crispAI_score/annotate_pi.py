@@ -41,14 +41,14 @@ def gc_content_flank(flank_size, sequence):
     'returns the GC content of the given sequence for each position. Each position is the center of a window of size flank_size bp flank_size on each side' 
     gc_content = []
     sequence = sequence.upper()
-    for i in range(flank_size):
-        gc_content.append('NA')
+    # for i in range(flank_size):
+    #     gc_content.append('NA')
     for i in range(flank_size, len(sequence)-flank_size):
         window = sequence[i-flank_size:i+flank_size + 1]
         gc_count = window.count('G') + window.count('C')
         gc_content.append(round(gc_count/(2*flank_size + 1), 3))
-    for i in range(flank_size):
-        gc_content.append('NA')
+    # for i in range(flank_size):
+    #     gc_content.append('NA')
 
     return gc_content
 
@@ -66,8 +66,9 @@ def read_nupop_output(dir, file_id):
                 aff = aff[-5:]
             affinity.append(aff)
             occupancy.append(occup)
-        affinity = ','.join(affinity)
-        occupancy = ','.join(occupancy)
+        affinity = ','.join(affinity[73:96])
+        occupancy = ','.join(occupancy[73:96])
+
         return occupancy, affinity
 
 def get_surrounding_sequence(chrom, start, end, strand, genome, flank=100):
@@ -105,7 +106,7 @@ def annotation_pipeline(offtarget_data: pd.DataFrame) -> pd.DataFrame:
     sgRNA_in_context = [context.find(sgRNA) for sgRNA, context in zip(offtarget_data['sgRNA_sequence'], offtarget_data['context sequence flank_73'])]
     print(sgRNA_in_context)
     offtarget_data['sgRNA_in_context'] = sgRNA_in_context
-    offtarget_data['sgRNA_in_context_offset'] = 72 - offtarget_data['sgRNA_in_context']
+    offtarget_data['sgRNA_in_context_offset'] = 73 - offtarget_data['sgRNA_in_context']
     # align sgRNA in the middle of the context sequence
     offtarget_data.loc[offtarget_data['strand'] == '+', start_col] = offtarget_data[start_col] - offtarget_data['sgRNA_in_context_offset']
     offtarget_data.loc[offtarget_data['strand'] == '-', start_col] = offtarget_data[start_col] + offtarget_data['sgRNA_in_context_offset']

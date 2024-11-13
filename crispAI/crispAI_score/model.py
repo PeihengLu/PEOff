@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 
-from _negative_binomial import ZeroInflatedNegativeBinomial
+from crispAI.crispAI_score._negative_binomial import ZeroInflatedNegativeBinomial
 
 from dataclasses import dataclass, field
 import numpy as np
@@ -154,25 +154,25 @@ class CrispAI_pi(nn.Module):
             output_dense_out_channels = out_features
             
 
-    def forward(self, x_seq, x_pi):
+    def forward(self, X_nucl, X_pi):
 
         '''
         Forward pass of crispAI model
-            - x_seq: (batch_size, seq_len, seq_encoding_channels)
+            - X_nucl: (batch_size, seq_len, seq_encoding_channels)
             - x_pi: (batch_size, seq_len, pi_encoding_channels)
             - output: (batch_size, output_dense[-1])
             - sequence features: stacked conv1d + lstm
             - pi features: conv1d
             - fusion features: concat(sequence features, pi features)
         '''
-        x_seq = x_seq.permute(0, 2, 1)
-        x_pi = x_pi.permute(0, 2, 1)
+        X_nucl = X_nucl.permute(0, 2, 1)
+        X_pi = X_pi.permute(0, 2, 1)
         
         for layer in self.conv_seq_layers:
-            x_seq = layer(x_seq)
+            X_nucl = layer(X_nucl)
 
-        x_seq = x_seq.view(x_seq.shape[0], -1, x_seq.shape[1])
-        _, (hn, _) = self.lstm(x_seq)
+        X_nucl = X_nucl.view(X_nucl.shape[0], -1, X_nucl.shape[1])
+        _, (hn, _) = self.lstm(X_nucl)
 
         hn = hn.permute(1, 0, 2).contiguous().view(hn.shape[1], -1)
 
@@ -180,14 +180,14 @@ class CrispAI_pi(nn.Module):
             hn = layer(hn)
 
         for layer in self.conv_pi_layers:
-            x_pi = layer(x_pi)
+            X_pi = layer(X_pi)
 
-        x_pi = x_pi.view(x_pi.shape[0], -1)
+        X_pi = X_pi.view(X_pi.shape[0], -1)
 
         for layer in self.pi_dense:
-            x_pi = layer(x_pi)
+            X_pi = layer(X_pi)
 
-        x_cat = torch.cat((hn, x_pi), dim=1)
+        x_cat = torch.cat((hn, X_pi), dim=1)
 
         for layer in self.output_dense:
             x_cat = layer(x_cat)
@@ -195,6 +195,13 @@ class CrispAI_pi(nn.Module):
         x_mu = torch.exp(x_cat[:, 0]).view(-1, 1)
         x_theta = torch.exp(x_cat[:, 1]).view(-1, 1)
         x_pi = x_cat[:, 2].view(-1, 1)
+
+        # mu and theta need to be strictly positive
+        x_mu = torch.clamp(x_mu, min=self.eps)
+        x_theta = torch.clamp(x_theta, min=self.eps)
+
+        # pi needs to be between 0 and 1
+        x_pi = torch.sigmoid(x_pi)
 
         x = torch.cat((x_mu, x_theta, x_pi), dim=1)
 

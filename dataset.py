@@ -86,17 +86,16 @@ def convert_pridict_to_crispai(data: pd.DataFrame) -> pd.DataFrame:
     data.loc[(data['strand'] == '+') & (data['Correction_Type'] == 'Insertion'), 'start'] = data['start'] - 1 + data['Correction_Length']
     data.loc[(data['strand'] == '+') & (data['Correction_Type'] == 'Deletion'), 'start'] = data['start'] - 1 + data['Correction_Length']
 
-    # save the data to the original file
-
-    # data.loc[(data['strand'] == '+') & (data['Correction_Type'] == 'Deletion'), 'start'] 
-
     data['start'] = data['start'].astype(int)
     data['end'] = data['start'] + 22
 
     data['target_sequence'] = data['wide_mutated_target'].str.slice(10, 33)
     data['sgRNA_sequence'] = data['target_sequence']
 
-    data = data[['chr', 'start', 'end', 'strand', 'target_sequence', 'sgRNA_sequence', 'genebe']]
+    data = data[['chr', 'start', 'end', 'strand', 'target_sequence', 'sgRNA_sequence', 'genebe', 'PE2df_percentageedited', 'uniqueindex']]
+
+    # rename pe2df_percentageedited to efficiency
+    data = data.rename(columns={'PE2df_percentageedited': 'efficiency'})
 
     data = annotation_pipeline(data)
 
