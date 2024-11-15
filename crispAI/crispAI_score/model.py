@@ -211,7 +211,7 @@ class CrispAI_pi(nn.Module):
         '''
         Draw samples from the predicted distribution
         '''
-        preds_ = self(x) # forward pass to get lambda
+        preds_ = self(x['X_nucl'], x['X_pi']) # forward pass to get lambda
         preds_ = preds_.cpu().detach().numpy()
 
         mu_ = preds_[:, 0]

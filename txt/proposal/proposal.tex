@@ -7,13 +7,13 @@
 \usepackage{subcaption}
 % limit page margin
 \usepackage[margin=1.2in]{geometry}
+\usepackage{biblatex}
 
-\addbibresource{reference.bib}
+\addbibresource{{../reference.bib}}
 \graphicspath{{../figures/}}
 \title{Proposal for PhD Research: 
 Quantifying the Uncertainty in both On and Off-target Activity of Prime Editing}
 \author{Peiheng Lu}
-\date{}
 
 \begin{document}
 
@@ -29,7 +29,7 @@ With the recent development of a number of off-target site detection protocols s
 zhuTrackingseqRevealsHeterogeneity2024}.
 A number of off-target prediction tools have been developed for CRISPR-Cas9, which makes up part of the prime editing system, while DeepPrime-Off developed via fine tuning DeepPrime on the off target sites remains as one of the few prime editing off-target prediction tools. Although the CRISPR-Cas9 system was an essential part of the prime editing system, as studies have pointed out, the reverse transcription process involving the PBS and RT sequences can also impact the off-target activity. Thus, novel tools are needed to produce more accurate predictions the off-target activity of prime editing\parencite{liangGenomewideProfilingPrime2023,yuPredictionEfficienciesDiverse2023}.
 
-On top of extending the model to predict the off-target activity of prime editing, I propose to modify the models to output the probability distribution of the editing efficiency, rather than a point estimation.
+On top of extending the model to predict the off-target activity of prime editing, I propose to develop an model capable of outputting the probability distribution of the editing efficiency, rather than a point estimation.
 
 Although majority of the existing solution (including my master's thesis) was aiming at producing a point estimation as the predicted editing efficiency\parencite{mathisMachineLearningPrediction2024,yuPredictionEfficienciesDiverse2023,koeppelPredictionPrimeEditing2023}, the energy-driven binding and cleavage processes are stochastic in nature\cite{stortzPiCRISPRPhysicallyInformed2023}. Thus, it could be more informative to model the posterior distribution of the activity of prime editing given the target loci and pegRNA sequence. An example benefit would be allowing researchers to select the guide design that has smaller variance in editing outcome, if multiple guides showed similar mean editing efficiency.
 
@@ -55,7 +55,9 @@ Additional methods including Monte Carlo dropout\parencite{galDropoutBayesianApp
     \end{subfigure}
 \end{figure}
 
-Overall, with the on and off target activity of prime editing quantified, we can provide a complete overview of the outcome of using a specific pegRNA sequence on a specific target loci in a specific cell line. This should noticeably improve the safety and efficiency of prime editing, and thus accelerate its clinical application.
+Overall, with the on and off target activity of prime editing quantified, we can provide a complete overview of the outcome of using a specific pegRNA sequence on a specific target loci in a specific cell line. This should noticeably improve the safety and efficiency of prime editing, and thus accelerate its clinical application, which would be a long-term goal of my PhD research. 
+
+Last year saw the first FDA approved CRISPR therapy - Casgevy - for the treatment of sickle cell disease, which took a remarkably short time of 11 years to go from the first CRISPR-Cas9 paper to the first FDA approval\cite{CRISPRClinicalTrials}. This is highly inspiring for more advanced CRISPR technologies including base editing and prime editing, both of which have been shown to have great potential in curing genetic diseases. I am planning to make contact with various wet labs to validate the model's prediction on their prime editing experiments, understanding their needs and better incorporating the in silico development model into their workflow. 
 
 \printbibliography
 

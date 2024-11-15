@@ -7,13 +7,23 @@
 \usepackage{subcaption}
 % limit page margin
 \usepackage[margin=1.2in]{geometry}
+\usepackage{biblatex}
 
-\addbibresource{reference.bib}
+\addbibresource{{../reference.bib}}
 \graphicspath{{../figures/}}
-\title{preliminary result 1: crispAI on PRIDICT 90k dataset}
+\title{preliminary result 1: base crispAI on PRIDICT 90k dataset}
 \author{Peiheng Lu}
-\date{}
 
 \begin{document}
 
 \maketitle
+
+To start testing the viability of crispAI model on the prime editing dataset, the moderately sized PRIDICT 90k dataset was modified to fit the input format of the crispAI model. At the first stage, the model itself underwent very little modification, only taking the sgRNA portion of the prime editors as input. 
+
+The crispAI model requires the 73bp long flank sequence of the target site, which would be used to calculate the moving window GC content, NuPoP affinity and occupancy, as well as BDM score\cite{stortzPiCRISPRPhysicallyInformed2023}. However, the wide target sequence in the PRIDICT 90k dataset was only 99bp long. As a result, a pipeline was developed to map each target site to the human genome reference sequence, and extract the 73bp flank sequence from the reference genome using the toolkit provided by crispAI authors.
+
+PRIDICT provided the HGVS(Human Genome Variation Society) notation of the intended edits, as well as the direction of the target strand(forward or reverse, in relation to the reference genome). 
+
+\printbibliography
+
+\end{document}
