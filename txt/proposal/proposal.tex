@@ -9,7 +9,7 @@
 \usepackage[margin=1.2in]{geometry}
 \usepackage{biblatex}
 
-\addbibresource{{../reference.bib}}
+\addbibresource{reference.bib}
 \graphicspath{{../figures/}}
 \title{Proposal for PhD Research: 
 Quantifying the Uncertainty in both On and Off-target Activity of Prime Editing}
@@ -21,7 +21,7 @@ Quantifying the Uncertainty in both On and Off-target Activity of Prime Editing}
 
 Prime editing is a novel gene editing technology that enables theoretically any base substitution, insertion, and deletion without the need for double-strand breaks or donor DNA templates\cite{liudavidr.SearchreplaceGenomeEditing2019,liuPrimeEditingPrecise2023}. Shown in Figure \ref{fig:prime-editing-process}, the prime editors's versatility can mostly be attributed to the reverse transcription mechanism. After the Cas9 nickase cleaves the target DNA strand, the PBS (prime binding site) portion of the pegRNA (prime editing guide RNA) hybridizes with the now floating 3' end of the target DNA strand. The reverse transcriptase (RT) then extends the 3' end of the target DNA strand using the RT template sequence in the pegRNA. The resulting DNA-RNA hybrid is then resolved by the endogenous DNA repair machinery, resulting in the desired edit.
 
-Due to its superior capability, prime editors have the potential to cure up to 90\% of diseases resulted from genetic mutations. However, its clinical application is still limited by the frequently low on target efficiency and the potential off-target activity\cite{zhaoPrimeEditingAdvances2023}.
+Due to its superior capability, prime editors have the potential to cure up to 90\% of diseases resulted from genetic mutations\cite{kantorCRISPRCas9DNABaseEditing2020}. However, its clinical application is still limited by the frequently low on target efficiency and the potential off-target activity\cite{zhaoPrimeEditingAdvances2023}.
 
 My master's thesis focused on predicting the on-target activity of prime editing using ensemble learning techniques and the Transformer model to improve pegRNA guide design qualities and thus overall efficiency, and achieved state-of-the-art performance on several existing datasets. As a result, moving on to the prediction of off-target activity of prime editing is a natural next step.
 
@@ -35,12 +35,10 @@ Although majority of the existing solution (including my master's thesis) was ai
 
 Recently, a probabilistic deep learning model, crispAI, was proposed to fit a zero inflated negative binomial distribution to the off-target activity of CRISPR-Cas9 on each potential target site\parencite{ozdenLearningQuantifyUncertainty2024}. It was able to accuracy predict the off-target activity in both minimal activity and high activity sites .....
 
-To validate the probabilistic approach, I conducted some preliminary experiments on the on-target prediction of prime editing efficiency using the mathis et al's 90k PE2 HEK293T dataset\parencite{mathisPredictingPrimeEditing2023}. 
+To validate the probabilistic approach, I conducted some preliminary experiments on the on-target prediction of prime editing efficiency using the mathis et al's 90k PE2 HEK293T dataset(detail of which can be found \href{https://github.com/PeihengLu/PEOff/blob/main/txt/preliminary/preliminary.pdf}{here})\parencite{mathisPredictingPrimeEditing2023}. 
 
-(Add details of the experiment and results)
 
-Additional methods including Monte Carlo dropout\parencite{galDropoutBayesianApproximation2016}/Deep ensemble can also be relatively easily applied to gauge the confidence of the model's prediction.
-
+On top of updating the output itself, additional methods including Monte Carlo dropout\parencite{galDropoutBayesianApproximation2016}/Deep ensemble can also be relatively easily applied to gauge the confidence of the model's prediction.
 
 \begin{figure}
     \centering
@@ -49,7 +47,7 @@ Additional methods including Monte Carlo dropout\parencite{galDropoutBayesianApp
         \caption{Prime editing process}
         \label{fig:prime-editing-process}
     \end{subfigure}
-    \begin{subfigure}{0.3\textwidth}
+    \begin{subfigure}{0.35\textwidth}
         \includegraphics[width=\textwidth]{efficiency_distribution.png}
         \caption{Distribution of measured editing efficiency}
     \end{subfigure}
