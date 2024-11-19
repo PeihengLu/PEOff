@@ -1,0 +1,928 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{liudavidr.SearchreplaceGenomeEditing2019}{article}{}
+      \name{author}{11}{}{%
+        {{hash=2ecfb1663fb9462cd0223bbbecd2a508}{%
+           family={{Liu David R.}},
+           familyi={L\bibinitperiod}}}%
+        {{hash=8276cc86c2ae450b257a3e405f7f049e}{%
+           family={Anzalone},
+           familyi={A\bibinitperiod},
+           given={Andrew\bibnamedelima V.},
+           giveni={A\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+        {{hash=90f359d41d18c5803ef3e56d2e7ead80}{%
+           family={Randolph},
+           familyi={R\bibinitperiod},
+           given={Peyton\bibnamedelima B.},
+           giveni={P\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=8c842ac42f9cd0ded8fbec39819cdc87}{%
+           family={Davis},
+           familyi={D\bibinitperiod},
+           given={Jessie\bibnamedelima R.},
+           giveni={J\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=692ef0a8dd7cefe9c4a7d04a266072d8}{%
+           family={Sousa},
+           familyi={S\bibinitperiod},
+           given={Alexander\bibnamedelima A.},
+           giveni={A\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=da1ebd714d4b83185d6110c8e211a272}{%
+           family={Koblan},
+           familyi={K\bibinitperiod},
+           given={Luke\bibnamedelima W.},
+           giveni={L\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=fca41fbf79eabb5451673cebdb86f1b1}{%
+           family={Levy},
+           familyi={L\bibinitperiod},
+           given={Jonathan\bibnamedelima M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=06bbec52482bd8aa66a6ed34034e5c50}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Peter\bibnamedelima J.},
+           giveni={P\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=5e93b8e18243c5095f35034fab83f30f}{%
+           family={Wilson},
+           familyi={W\bibinitperiod},
+           given={Christopher},
+           giveni={C\bibinitperiod}}}%
+        {{hash=1ce51505628d9f1ca6f6f6a871299cdd}{%
+           family={Newby},
+           familyi={N\bibinitperiod},
+           given={Gregory\bibnamedelima A.},
+           giveni={G\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=0b7ca92d7c005312a71e61feb4b80f6b}{%
+           family={Raguram},
+           familyi={R\bibinitperiod},
+           given={Aditya},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{6b81433edf03803d365e6f2b350e66ce}
+      \strng{fullhash}{b82224586552e8d840fbcc60dc79182b}
+      \strng{bibnamehash}{6b81433edf03803d365e6f2b350e66ce}
+      \strng{authorbibnamehash}{6b81433edf03803d365e6f2b350e66ce}
+      \strng{authornamehash}{6b81433edf03803d365e6f2b350e66ce}
+      \strng{authorfullhash}{b82224586552e8d840fbcc60dc79182b}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{5}
+      \field{issn}{0028-0836, 1476-4687}
+      \field{journaltitle}{Nature}
+      \field{langid}{english}
+      \field{month}{12}
+      \field{number}{7785}
+      \field{shortjournal}{Nature}
+      \field{title}{Search-and-Replace Genome Editing without Double-Strand Breaks or Donor {{DNA}}}
+      \field{urlday}{8}
+      \field{urlmonth}{2}
+      \field{urlyear}{2024}
+      \field{volume}{576}
+      \field{year}{2019}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{149\bibrangedash 157}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1038/s41586-019-1711-4
+      \endverb
+      \verb{file}
+      \verb C:\Users\13954\Zotero\storage\LU7U3B7C\Liu David R. et al. - 2019 - Search-and-replace genome editing without double-strand breaks or donor DNA.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.nature.com/articles/s41586-019-1711-4
+      \endverb
+      \verb{url}
+      \verb https://www.nature.com/articles/s41586-019-1711-4
+      \endverb
+    \endentry
+    \entry{liuPrimeEditingPrecise2023}{article}{}
+      \name{author}{2}{}{%
+        {{hash=2ecfb1663fb9462cd0223bbbecd2a508}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={David\bibnamedelima R.},
+           giveni={D\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=06bbec52482bd8aa66a6ed34034e5c50}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Peter\bibnamedelima J.},
+           giveni={P\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{3e2314ebd7512dd97a0b0cec0b26b710}
+      \strng{fullhash}{3e2314ebd7512dd97a0b0cec0b26b710}
+      \strng{bibnamehash}{3e2314ebd7512dd97a0b0cec0b26b710}
+      \strng{authorbibnamehash}{3e2314ebd7512dd97a0b0cec0b26b710}
+      \strng{authornamehash}{3e2314ebd7512dd97a0b0cec0b26b710}
+      \strng{authorfullhash}{3e2314ebd7512dd97a0b0cec0b26b710}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1471-0056, 1471-0064}
+      \field{journaltitle}{Nature Reviews Genetics}
+      \field{langid}{english}
+      \field{month}{3}
+      \field{number}{3}
+      \field{shortjournal}{Nat Rev Genet}
+      \field{title}{Prime Editing for Precise and Highly Versatile Genome Manipulation}
+      \field{urlday}{16}
+      \field{urlmonth}{2}
+      \field{urlyear}{2024}
+      \field{volume}{24}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{161\bibrangedash 177}
+      \range{pages}{17}
+      \verb{doi}
+      \verb 10.1038/s41576-022-00541-1
+      \endverb
+      \verb{file}
+      \verb C:\Users\13954\Zotero\storage\X3PFFX43\Liu and Chen - 2023 - Prime editing for precise and highly versatile genome manipulation.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.nature.com/articles/s41576-022-00541-1
+      \endverb
+      \verb{url}
+      \verb https://www.nature.com/articles/s41576-022-00541-1
+      \endverb
+    \endentry
+    \entry{zhaoPrimeEditingAdvances2023}{article}{}
+      \name{author}{4}{}{%
+        {{hash=06801bc57c02477cd5241977a47ab0e3}{%
+           family={Zhao},
+           familyi={Z\bibinitperiod},
+           given={Zhihan},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=54cf231b4a82fb60872b2a471df7c263}{%
+           family={Shang},
+           familyi={S\bibinitperiod},
+           given={Peng},
+           giveni={P\bibinitperiod}}}%
+        {{hash=06c2850f1458245d6fcf4a5ebc07a13e}{%
+           family={Mohanraju},
+           familyi={M\bibinitperiod},
+           given={Prarthana},
+           giveni={P\bibinitperiod}}}%
+        {{hash=20e739980a3f79ff507417bd29a97302}{%
+           family={Geijsen},
+           familyi={G\bibinitperiod},
+           given={Niels},
+           giveni={N\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{e838591161a471e2acbaa845be12c653}
+      \strng{fullhash}{8f32b955fe0ad7ac3fbc11ee5440c49a}
+      \strng{bibnamehash}{e838591161a471e2acbaa845be12c653}
+      \strng{authorbibnamehash}{e838591161a471e2acbaa845be12c653}
+      \strng{authornamehash}{e838591161a471e2acbaa845be12c653}
+      \strng{authorfullhash}{8f32b955fe0ad7ac3fbc11ee5440c49a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{day}{1}
+      \field{eprinttype}{pmid}
+      \field{issn}{0167-7799, 1879-3096}
+      \field{journaltitle}{Trends in Biotechnology}
+      \field{langid}{english}
+      \field{month}{8}
+      \field{number}{8}
+      \field{shortjournal}{Trends in Biotechnology}
+      \field{shorttitle}{Prime Editing}
+      \field{title}{Prime Editing: Advances and Therapeutic Applications}
+      \field{urlday}{16}
+      \field{urlmonth}{10}
+      \field{urlyear}{2024}
+      \field{volume}{41}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{1000\bibrangedash 1012}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1016/j.tibtech.2023.03.004
+      \endverb
+      \verb{eprint}
+      \verb 37002157
+      \endverb
+      \verb{file}
+      \verb C:\Users\13954\Zotero\storage\V8DJG4NG\Zhao et al. - 2023 - Prime editing advances and therapeutic applications.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.cell.com/trends/biotechnology/abstract/S0167-7799(23)00085-9
+      \endverb
+      \verb{url}
+      \verb https://www.cell.com/trends/biotechnology/abstract/S0167-7799(23)00085-9
+      \endverb
+      \keyw{CRIPSR–Cas,genome editing,prime editing,therapeutics}
+    \endentry
+    \entry{liangGenomewideProfilingPrime2023}{article}{}
+      \name{author}{11}{}{%
+        {{hash=156341bea67a0c5c1db2cc72fe3c1aa3}{%
+           family={Liang},
+           familyi={L\bibinitperiod},
+           given={Shun-Qing},
+           giveni={S\bibinithyphendelim Q\bibinitperiod}}}%
+        {{hash=8145d12773aaff591bff36415b523798}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Pengpeng},
+           giveni={P\bibinitperiod}}}%
+        {{hash=271e1f55c933ecd453400719698f135c}{%
+           family={Ponnienselvan},
+           familyi={P\bibinitperiod},
+           given={Karthikeyan},
+           giveni={K\bibinitperiod}}}%
+        {{hash=3106bc3473ee70c416f2c6cdba1005e2}{%
+           family={Suresh},
+           familyi={S\bibinitperiod},
+           given={Sneha},
+           giveni={S\bibinitperiod}}}%
+        {{hash=f477f907397abd7661705d5792064ae1}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Zexiang},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=10b7957b019b9cd0d910988f55ee910a}{%
+           family={Kramme},
+           familyi={K\bibinitperiod},
+           given={Christian},
+           giveni={C\bibinitperiod}}}%
+        {{hash=c092deef3007c98d70692e1036f40608}{%
+           family={Chatterjee},
+           familyi={C\bibinitperiod},
+           given={Pranam},
+           giveni={P\bibinitperiod}}}%
+        {{hash=ece9f625f13e9b096391a71360b0af72}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={Lihua\bibnamedelima Julie},
+           giveni={L\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=096e8a805f0d587cb1cd17453330d8b2}{%
+           family={Sontheimer},
+           familyi={S\bibinitperiod},
+           given={Erik\bibnamedelima J.},
+           giveni={E\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=d967209386edd089bef85f1b0d56e0f9}{%
+           family={Xue},
+           familyi={X\bibinitperiod},
+           given={Wen},
+           giveni={W\bibinitperiod}}}%
+        {{hash=d4eadf66f52be8b1a1cf13be48354360}{%
+           family={Wolfe},
+           familyi={W\bibinitperiod},
+           given={Scot\bibnamedelima A.},
+           giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Nature Publishing Group}%
+      }
+      \strng{namehash}{dbc99afd578bc82dec265c5e3084d9ff}
+      \strng{fullhash}{9532e17e917ef461f4b342339fbb82c6}
+      \strng{bibnamehash}{dbc99afd578bc82dec265c5e3084d9ff}
+      \strng{authorbibnamehash}{dbc99afd578bc82dec265c5e3084d9ff}
+      \strng{authornamehash}{dbc99afd578bc82dec265c5e3084d9ff}
+      \strng{authorfullhash}{9532e17e917ef461f4b342339fbb82c6}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Prime editors have a broad range of potential research and clinical applications. However, methods to delineate their genome-wide editing activities have generally relied on indirect genome-wide editing assessments or the computational prediction of near-cognate sequences. Here we describe a genome-wide approach for the identification of potential prime editor off-target sites, which we call PE-tag. This method relies on the attachment or insertion of an amplification tag at sites of prime editor activity to allow their identification. PE-tag enables genome-wide profiling of off-target sites in vitro using extracted genomic DNA, in mammalian cell lines and in the adult mouse liver. PE-tag components can be delivered in a variety of formats for off-target site detection. Our studies are consistent with the high specificity previously described for prime editor systems, but we find that off-target editing rates are influenced by prime editing guide RNA design. PE-tag represents an accessible, rapid and sensitive approach for the genome-wide identification of prime editor activity and the evaluation of prime editor safety.}
+      \field{issn}{1548-7105}
+      \field{journaltitle}{Nature Methods}
+      \field{langid}{english}
+      \field{month}{6}
+      \field{number}{6}
+      \field{shortjournal}{Nat Methods}
+      \field{title}{Genome-Wide Profiling of Prime Editor off-Target Sites in Vitro and in Vivo Using {{PE-tag}}}
+      \field{urlday}{30}
+      \field{urlmonth}{9}
+      \field{urlyear}{2024}
+      \field{volume}{20}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{898\bibrangedash 907}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1038/s41592-023-01859-2
+      \endverb
+      \verb{file}
+      \verb C:\Users\13954\Zotero\storage\ZUWIGLYY\Liang et al. - 2023 - Genome-wide profiling of prime editor off-target sites in vitro and in vivo using PE-tag.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.nature.com/articles/s41592-023-01859-2
+      \endverb
+      \verb{url}
+      \verb https://www.nature.com/articles/s41592-023-01859-2
+      \endverb
+      \keyw{Biotechnology,Gene regulation,Genetic engineering,Genome,Off-target,prime editing}
+    \endentry
+    \entry{zhuTrackingseqRevealsHeterogeneity2024}{article}{}
+      \name{author}{19}{}{%
+        {{hash=4b7d3b4397052de8f3b58a02049b88c3}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={Ming},
+           giveni={M\bibinitperiod}}}%
+        {{hash=ccd9d3d928318d7f814b3123420b3e31}{%
+           family={Xu},
+           familyi={X\bibinitperiod},
+           given={Runda},
+           giveni={R\bibinitperiod}}}%
+        {{hash=61d69a2ddeb1bb221c75d9b920f83e57}{%
+           family={Yuan},
+           familyi={Y\bibinitperiod},
+           given={Junsong},
+           giveni={J\bibinitperiod}}}%
+        {{hash=735fe5149a53b613f53f3bc198eac59c}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Jiacheng},
+           giveni={J\bibinitperiod}}}%
+        {{hash=9d4b95597535b2e22141892a9ad09fa1}{%
+           family={Ren},
+           familyi={R\bibinitperiod},
+           given={Xiaoyu},
+           giveni={X\bibinitperiod}}}%
+        {{hash=34d5df09daed1ed1ddbab061b6d980c9}{%
+           family={Cong},
+           familyi={C\bibinitperiod},
+           given={Tingting},
+           giveni={T\bibinitperiod}}}%
+        {{hash=18c433705b0129c4511d5242286b1cf4}{%
+           family={You},
+           familyi={Y\bibinitperiod},
+           given={Yaxian},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=6337fe549c71f56e6c4a5a5ed380a38e}{%
+           family={Ju},
+           familyi={J\bibinitperiod},
+           given={Anji},
+           giveni={A\bibinitperiod}}}%
+        {{hash=429f2efa6ba1ddd37c454e152963a197}{%
+           family={Xu},
+           familyi={X\bibinitperiod},
+           given={Longchen},
+           giveni={L\bibinitperiod}}}%
+        {{hash=458e4e3395712b5b3b3a85e4e7fe673c}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Huimin},
+           giveni={H\bibinitperiod}}}%
+        {{hash=bd77154def201216247284747dc755fb}{%
+           family={Zheng},
+           familyi={Z\bibinitperiod},
+           given={Peiyuan},
+           giveni={P\bibinitperiod}}}%
+        {{hash=04093ce18d5d88364599c750ef32af45}{%
+           family={Tao},
+           familyi={T\bibinitperiod},
+           given={Huiying},
+           giveni={H\bibinitperiod}}}%
+        {{hash=614bd75f1b0d4884edccc8ed6affab61}{%
+           family={Lin},
+           familyi={L\bibinitperiod},
+           given={Chunhua},
+           giveni={C\bibinitperiod}}}%
+        {{hash=7d78eacb25f7b271880e0ac276f7d512}{%
+           family={Yu},
+           familyi={Y\bibinitperiod},
+           given={Honghao},
+           giveni={H\bibinitperiod}}}%
+        {{hash=ba9794ac23952aa9e7aebc5ce5cea1a8}{%
+           family={Du},
+           familyi={D\bibinitperiod},
+           given={Juanjuan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=4009e963a9f7a218cfa1e91b974fefa0}{%
+           family={Lin},
+           familyi={L\bibinitperiod},
+           given={Xin},
+           giveni={X\bibinitperiod}}}%
+        {{hash=a3f94462dfa72557cc934d7e6b213092}{%
+           family={Xie},
+           familyi={X\bibinitperiod},
+           given={Wei},
+           giveni={W\bibinitperiod}}}%
+        {{hash=50e820b24735e9de3b62d0e792cd980b}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Yinqing},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=01b0440837130fa0cc3a42ab1612f26f}{%
+           family={Lan},
+           familyi={L\bibinitperiod},
+           given={Xun},
+           giveni={X\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Nature Publishing Group}%
+      }
+      \strng{namehash}{1771b8933b13208bf9e1871ece236d0a}
+      \strng{fullhash}{063108643a6cafb218b4f85f4043fd49}
+      \strng{bibnamehash}{1771b8933b13208bf9e1871ece236d0a}
+      \strng{authorbibnamehash}{1771b8933b13208bf9e1871ece236d0a}
+      \strng{authornamehash}{1771b8933b13208bf9e1871ece236d0a}
+      \strng{authorfullhash}{063108643a6cafb218b4f85f4043fd49}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The continued development of novel genome editors calls for a universal method to analyze their off-target effects. Here we describe a versatile method, called Tracking-seq, for in situ identification of off-target effects that is broadly applicable to common genome-editing tools, including Cas9, base editors and prime editors. Through tracking replication protein A (RPA)-bound single-stranded DNA followed by strand-specific library construction, Tracking-seq requires a low cell input and is suitable for in vitro, ex vivo and in vivo genome editing, providing a sensitive and practical genome-wide approach for off-target detection in various scenarios. We show, using the same guide RNA, that Tracking-seq detects heterogeneity in off-target effects between different editor modalities and between different cell types, underscoring the necessity of direct measurement in the original system.}
+      \field{day}{2}
+      \field{issn}{1546-1696}
+      \field{journaltitle}{Nature Biotechnology}
+      \field{langid}{english}
+      \field{month}{7}
+      \field{shortjournal}{Nat Biotechnol}
+      \field{title}{Tracking-Seq Reveals the Heterogeneity of off-Target Effects in {{CRISPR}}–{{Cas9-mediated}} Genome Editing}
+      \field{urlday}{28}
+      \field{urlmonth}{9}
+      \field{urlyear}{2024}
+      \field{year}{2024}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{1\bibrangedash 12}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1038/s41587-024-02307-y
+      \endverb
+      \verb{file}
+      \verb C:\Users\13954\Zotero\storage\EEDN2HGK\Zhu et al. - 2024 - Tracking-seq reveals the heterogeneity of off-target effects in CRISPR–Cas9-mediated genome editing.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.nature.com/articles/s41587-024-02307-y
+      \endverb
+      \verb{url}
+      \verb https://www.nature.com/articles/s41587-024-02307-y
+      \endverb
+      \keyw{Biotechnology,Molecular biology}
+    \endentry
+    \entry{yuPredictionEfficienciesDiverse2023}{article}{}
+      \name{author}{9}{}{%
+        {{hash=37fc4a99b0737338bbdcae3124557f84}{%
+           family={Yu},
+           familyi={Y\bibinitperiod},
+           given={Goosang},
+           giveni={G\bibinitperiod}}}%
+        {{hash=9702ebe271903a415dc3dc9857846fe6}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Hui\bibnamedelima Kwon},
+           giveni={H\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+        {{hash=2df6a17bf539c8abcbc5fc292407c115}{%
+           family={Park},
+           familyi={P\bibinitperiod},
+           given={Jinman},
+           giveni={J\bibinitperiod}}}%
+        {{hash=93f32333f77afe94dbc8e2b38bda0618}{%
+           family={Kwak},
+           familyi={K\bibinitperiod},
+           given={Hyunjong},
+           giveni={H\bibinitperiod}}}%
+        {{hash=f963751c29e26842b9be043648ce5883}{%
+           family={Cheong},
+           familyi={C\bibinitperiod},
+           given={Yumin},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=05631cb0a215c3640f1dd4321c1bb75e}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Dongyoung},
+           giveni={D\bibinitperiod}}}%
+        {{hash=aa2ab532c4b93d2fed55c6b60eaad1de}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Jiyun},
+           giveni={J\bibinitperiod}}}%
+        {{hash=eff5599bbefcb8a30e86f5c5f675ba6b}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Jisung},
+           giveni={J\bibinitperiod}}}%
+        {{hash=8d91bff7364175fdb188a0895e7b7f7e}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Hyongbum\bibnamedelima Henry},
+           giveni={H\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+      }
+      \strng{namehash}{e32e29d5c2305b9289ef3d96cba2225c}
+      \strng{fullhash}{c5abb0bff7c39978aa6636d065cf37a7}
+      \strng{bibnamehash}{e32e29d5c2305b9289ef3d96cba2225c}
+      \strng{authorbibnamehash}{e32e29d5c2305b9289ef3d96cba2225c}
+      \strng{authornamehash}{e32e29d5c2305b9289ef3d96cba2225c}
+      \strng{authorfullhash}{c5abb0bff7c39978aa6636d065cf37a7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Applications of prime editing are often limited due to insufficient efficiencies, and it can require substantial time and resources to determine the most efficient pegRNAs and prime editors (PEs) to generate a desired edit under various experimental conditions. Here, we evaluated prime editing efficiencies for a total of 338,996 pairs of pegRNAs including 3,979 epegRNAs and target sequences in an error-free manner. These datasets enabled a systematic determination of factors affecting prime editing efficiencies. Then, we developed computational models, named DeepPrime and DeepPrime-FT, that can predict prime editing efficiencies for eight prime editing systems in seven cell types for all possible types of editing of up to 3 base pairs. We also extensively profiled the prime editing efficiencies at mismatched targets and developed a computational model predicting editing efficiencies at such targets. These computational models, together with our improved knowledge about prime editing efficiency determinants, will greatly facilitate prime editing applications.}
+      \field{issn}{00928674}
+      \field{journaltitle}{Cell}
+      \field{langid}{english}
+      \field{month}{5}
+      \field{number}{10}
+      \field{shortjournal}{Cell}
+      \field{title}{Prediction of Efficiencies for Diverse Prime Editing Systems in Multiple Cell Types}
+      \field{urlday}{3}
+      \field{urlmonth}{5}
+      \field{urlyear}{2024}
+      \field{volume}{186}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{2256\bibrangedash 2272.e23}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1016/j.cell.2023.03.034
+      \endverb
+      \verb{file}
+      \verb C\:\\Users\\13954\\OneDrive\\Papers\\prime-editing\\Yu et al. - 2023 - Prediction of efficiencies for diverse prime editing systems in multiple cell types.pdf;C\:\\Users\\13954\\Zotero\\storage\\WZE3E8LC\\Yu et al. - 2023 - Prediction of efficiencies for diverse prime editi.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://linkinghub.elsevier.com/retrieve/pii/S0092867423003318
+      \endverb
+      \verb{url}
+      \verb https://linkinghub.elsevier.com/retrieve/pii/S0092867423003318
+      \endverb
+      \keyw{deep learning,efficiency,features,high-throughput evaluations,off-target effects,prediction,prime editing,prime editors,sequence}
+    \endentry
+    \entry{mathisMachineLearningPrediction2024}{article}{}
+      \name{author}{15}{}{%
+        {{hash=fbe8e94edb7f9269db7c50c822e07d92}{%
+           family={Mathis},
+           familyi={M\bibinitperiod},
+           given={Nicolas},
+           giveni={N\bibinitperiod}}}%
+        {{hash=49c74ff1610fb22368e983a00fe6d3f8}{%
+           family={Allam},
+           familyi={A\bibinitperiod},
+           given={Ahmed},
+           giveni={A\bibinitperiod}}}%
+        {{hash=a6b2fde449aa6ffe11f762cb3db14941}{%
+           family={Tálas},
+           familyi={T\bibinitperiod},
+           given={András},
+           giveni={A\bibinitperiod}}}%
+        {{hash=f8e2ac39456a5a2562b4e4fb323a9a06}{%
+           family={Kissling},
+           familyi={K\bibinitperiod},
+           given={Lucas},
+           giveni={L\bibinitperiod}}}%
+        {{hash=d136818fdcf8b93131147b589f74bc0a}{%
+           family={Benvenuto},
+           familyi={B\bibinitperiod},
+           given={Elena},
+           giveni={E\bibinitperiod}}}%
+        {{hash=7d0192a72feb6a74360a1e0d4c096b8b}{%
+           family={Schmidheini},
+           familyi={S\bibinitperiod},
+           given={Lukas},
+           giveni={L\bibinitperiod}}}%
+        {{hash=9f099d267bafaf1fe6c06869fdeeac8c}{%
+           family={Schep},
+           familyi={S\bibinitperiod},
+           given={Ruben},
+           giveni={R\bibinitperiod}}}%
+        {{hash=a3268d7e4a7f699615a27a8dfca88971}{%
+           family={Damodharan},
+           familyi={D\bibinitperiod},
+           given={Tanav},
+           giveni={T\bibinitperiod}}}%
+        {{hash=df432ff57fd2df92c0e22f5c2cfceb18}{%
+           family={Balázs},
+           familyi={B\bibinitperiod},
+           given={Zsolt},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=fa0c8a24099b2ff26c8a07365920974f}{%
+           family={Janjuha},
+           familyi={J\bibinitperiod},
+           given={Sharan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=3f3953825d783cc0b56d3e6c23a8aeeb}{%
+           family={Ioannidi},
+           familyi={I\bibinitperiod},
+           given={Eleonora\bibnamedelima I.},
+           giveni={E\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+        {{hash=86bf130af7b8b27c41e7e239c528ebed}{%
+           family={Böck},
+           familyi={B\bibinitperiod},
+           given={Desirée},
+           giveni={D\bibinitperiod}}}%
+        {{useprefix=true,hash=33ef0e2f70962bd7de79c9bf7ec9cc0e}{%
+           family={Steensel},
+           familyi={S\bibinitperiod},
+           given={Bas},
+           giveni={B\bibinitperiod},
+           prefix={van},
+           prefixi={v\bibinitperiod}}}%
+        {{hash=add5b43f87f0930ad7103b3a7795ab3a}{%
+           family={Krauthammer},
+           familyi={K\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=22258b1b7a13aae786a27a7a6b1980c8}{%
+           family={Schwank},
+           familyi={S\bibinitperiod},
+           given={Gerald},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Nature Publishing Group}%
+      }
+      \strng{namehash}{57786a44903a4c73e8e7f8233ad2dc63}
+      \strng{fullhash}{217c538cfa72973c84e5d877a26c408c}
+      \strng{bibnamehash}{57786a44903a4c73e8e7f8233ad2dc63}
+      \strng{authorbibnamehash}{57786a44903a4c73e8e7f8233ad2dc63}
+      \strng{authornamehash}{57786a44903a4c73e8e7f8233ad2dc63}
+      \strng{authorfullhash}{217c538cfa72973c84e5d877a26c408c}
+      \field{extraname}{1}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The success of prime editing depends on the prime editing guide RNA (pegRNA) design and target locus. Here, we developed machine learning models that reliably predict prime editing efficiency. PRIDICT2.0 assesses the performance of pegRNAs for all edit types up to 15 bp in length in mismatch repair-deficient and mismatch repair-proficient cell lines and in vivo in primary cells. With ePRIDICT, we further developed a model that quantifies how local chromatin environments impact prime editing rates.}
+      \field{day}{21}
+      \field{issn}{1546-1696}
+      \field{journaltitle}{Nature Biotechnology}
+      \field{langid}{english}
+      \field{month}{6}
+      \field{shortjournal}{Nat Biotechnol}
+      \field{title}{Machine Learning Prediction of Prime Editing Efficiency across Diverse Chromatin Contexts}
+      \field{urlday}{23}
+      \field{urlmonth}{6}
+      \field{urlyear}{2024}
+      \field{year}{2024}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{1\bibrangedash 8}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1038/s41587-024-02268-2
+      \endverb
+      \verb{file}
+      \verb C\:\\Users\\13954\\Zotero\\storage\\DNZHY5LX\\Mathis et al. - 2024 - Machine learning prediction of prime editing effic.pdf;C\:\\Users\\13954\\Zotero\\storage\\JNVLVVBW\\41587_2024_2268_MOESM1_ESM.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.nature.com/articles/s41587-024-02268-2
+      \endverb
+      \verb{url}
+      \verb https://www.nature.com/articles/s41587-024-02268-2
+      \endverb
+      \keyw{Chromatin,Epigenetics,Genetic engineering,High-throughput screening,Machine learning,prime editing}
+    \endentry
+    \entry{koeppelPredictionPrimeEditing2023}{article}{}
+      \name{author}{9}{}{%
+        {{hash=521af0ddb572227bc20f0af28a9f364b}{%
+           family={Koeppel},
+           familyi={K\bibinitperiod},
+           given={Jonas},
+           giveni={J\bibinitperiod}}}%
+        {{hash=888f170d575cbc53bf3030e0c8d63799}{%
+           family={Weller},
+           familyi={W\bibinitperiod},
+           given={Juliane},
+           giveni={J\bibinitperiod}}}%
+        {{hash=14e924e1f141d2b0a0f157488e53cba5}{%
+           family={Peets},
+           familyi={P\bibinitperiod},
+           given={Elin\bibnamedelima Madli},
+           giveni={E\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=9c2c650c733c483a4560d36290878897}{%
+           family={Pallaseni},
+           familyi={P\bibinitperiod},
+           given={Ananth},
+           giveni={A\bibinitperiod}}}%
+        {{hash=fed7237a950f573b2f2fab92e55adb77}{%
+           family={Kuzmin},
+           familyi={K\bibinitperiod},
+           given={Ivan},
+           giveni={I\bibinitperiod}}}%
+        {{hash=ed5c8ec6c197b990e431c156bfa436ce}{%
+           family={Raudvere},
+           familyi={R\bibinitperiod},
+           given={Uku},
+           giveni={U\bibinitperiod}}}%
+        {{hash=39ed66e0156350931e55fabac1962e94}{%
+           family={Peterson},
+           familyi={P\bibinitperiod},
+           given={Hedi},
+           giveni={H\bibinitperiod}}}%
+        {{hash=3505fe1e8001371e011311db16c5a672}{%
+           family={Liberante},
+           familyi={L\bibinitperiod},
+           given={Fabio\bibnamedelima Giuseppe},
+           giveni={F\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=b3f99feeb471740ed41fbbf2ac3ea026}{%
+           family={Parts},
+           familyi={P\bibinitperiod},
+           given={Leopold},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{322c8263679c291c30eb806577528e2d}
+      \strng{fullhash}{fa34184ff27ad237894dcc8a1970311c}
+      \strng{bibnamehash}{322c8263679c291c30eb806577528e2d}
+      \strng{authorbibnamehash}{322c8263679c291c30eb806577528e2d}
+      \strng{authornamehash}{322c8263679c291c30eb806577528e2d}
+      \strng{authorfullhash}{fa34184ff27ad237894dcc8a1970311c}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Abstract Most short sequences can be precisely written into a selected genomic target using prime editing; however, it remains unclear what factors govern insertion. We design a library of 3,604 sequences of various lengths and measure the frequency of their insertion into four genomic sites in three human cell lines, using different prime editor systems in varying DNA repair contexts. We find that length, nucleotide composition and secondary structure of the insertion sequence all affect insertion rates. We also discover that the 3′ flap nucleases TREX1 and TREX2 suppress the insertion of longer sequences. Combining the sequence and repair features into a machine learning model, we can predict relative frequency of insertions into a site with R \,=\,0.70. Finally, we demonstrate how our accurate prediction and user-friendly software help choose codon variants of common fusion tags that insert at high efficiency, and provide a catalog of empirically determined insertion rates for over a hundred useful sequences.}
+      \field{issn}{1087-0156, 1546-1696}
+      \field{journaltitle}{Nature Biotechnology}
+      \field{langid}{english}
+      \field{month}{10}
+      \field{number}{10}
+      \field{shortjournal}{Nat Biotechnol}
+      \field{title}{Prediction of Prime Editing Insertion Efficiencies Using Sequence Features and {{DNA}} Repair Determinants}
+      \field{urlday}{7}
+      \field{urlmonth}{2}
+      \field{urlyear}{2024}
+      \field{volume}{41}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{1446\bibrangedash 1456}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1038/s41587-023-01678-y
+      \endverb
+      \verb{file}
+      \verb C:\Users\13954\Zotero\storage\NJXCLMF5\Koeppel et al. - 2023 - Prediction of prime editing insertion efficiencies using sequence features and DNA repair determinan.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.nature.com/articles/s41587-023-01678-y
+      \endverb
+      \verb{url}
+      \verb https://www.nature.com/articles/s41587-023-01678-y
+      \endverb
+    \endentry
+    \entry{ozdenLearningQuantifyUncertainty2024}{article}{}
+      \name{author}{2}{}{%
+        {{hash=1c4b0b4a4fb20c866d31ea73cf898ec2}{%
+           family={Özden},
+           familyi={Ö\bibinitperiod},
+           given={Furkan},
+           giveni={F\bibinitperiod}}}%
+        {{hash=b071a366987cb6948a76a403839407a0}{%
+           family={Minary},
+           familyi={M\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{b96d75c1a2726a33742c7eba7743ebf7}
+      \strng{fullhash}{b96d75c1a2726a33742c7eba7743ebf7}
+      \strng{bibnamehash}{b96d75c1a2726a33742c7eba7743ebf7}
+      \strng{authorbibnamehash}{b96d75c1a2726a33742c7eba7743ebf7}
+      \strng{authornamehash}{b96d75c1a2726a33742c7eba7743ebf7}
+      \strng{authorfullhash}{b96d75c1a2726a33742c7eba7743ebf7}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{CRISPR-based genome editing technologies have revolutionised the field of molecular biology, offering unprecedented opportunities for precise genetic manipulation. However, off-target effects remain a significant challenge, potentially leading to unintended consequences and limiting the applicability of CRISPR-based genome editing technologies in clinical settings. Current literature predominantly focuses on point predictions for off-target activity, which may not fully capture the range of possible outcomes and associated risks. Here, we present crispAI, a neural network architecture-based approach for predicting uncertainty estimates for off-target cleavage activity, providing a more comprehensive risk assessment and facilitating improved decision-making in single guide RNA (sgRNA) design. Our approach makes use of the count noise model Zero Inflated Negative Binomial (ZINB) to model the uncertainty in the off-target cleavage activity data. In addition, we present the first-of-itskind genome-wide sgRNA efficiency score, crispAI-aggregate, enabling prioritization among sgRNAs with similar point aggregate predictions by providing richer information compared to existing aggregate scores. We show that uncertainty estimates of our approach are calibrated and its predictive performance is superior to the state-of-the-art in silico off-target cleavage activity prediction methods. The tool and the trained models are available at https://github.com/furkanozdenn/crispr-offtarget-uncertainty.}
+      \field{day}{14}
+      \field{issn}{0305-1048, 1362-4962}
+      \field{journaltitle}{Nucleic Acids Research}
+      \field{langid}{english}
+      \field{month}{9}
+      \field{title}{Learning to Quantify Uncertainty in Off-Target Activity for {{CRISPR}} Guide {{RNAs}}}
+      \field{urlday}{28}
+      \field{urlmonth}{9}
+      \field{urlyear}{2024}
+      \field{year}{2024}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{gkae759}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1093/nar/gkae759
+      \endverb
+      \verb{file}
+      \verb C:\Users\13954\Zotero\storage\L8KLBTGS\Özden and Minary - 2024 - Learning to quantify uncertainty in off-target activity for CRISPR guide RNAs.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://academic.oup.com/nar/advance-article/doi/10.1093/nar/gkae759/7757940
+      \endverb
+      \verb{url}
+      \verb https://academic.oup.com/nar/advance-article/doi/10.1093/nar/gkae759/7757940
+      \endverb
+    \endentry
+    \entry{mathisPredictingPrimeEditing2023}{article}{}
+      \name{author}{9}{}{%
+        {{hash=fbe8e94edb7f9269db7c50c822e07d92}{%
+           family={Mathis},
+           familyi={M\bibinitperiod},
+           given={Nicolas},
+           giveni={N\bibinitperiod}}}%
+        {{hash=49c74ff1610fb22368e983a00fe6d3f8}{%
+           family={Allam},
+           familyi={A\bibinitperiod},
+           given={Ahmed},
+           giveni={A\bibinitperiod}}}%
+        {{hash=f8e2ac39456a5a2562b4e4fb323a9a06}{%
+           family={Kissling},
+           familyi={K\bibinitperiod},
+           given={Lucas},
+           giveni={L\bibinitperiod}}}%
+        {{hash=c71cabbbf6842e1184bf714b58390ce5}{%
+           family={Marquart},
+           familyi={M\bibinitperiod},
+           given={Kim\bibnamedelima Fabiano},
+           giveni={K\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=7d0192a72feb6a74360a1e0d4c096b8b}{%
+           family={Schmidheini},
+           familyi={S\bibinitperiod},
+           given={Lukas},
+           giveni={L\bibinitperiod}}}%
+        {{hash=e0928b83bd5fbae3e7f9d43959434c7f}{%
+           family={Solari},
+           familyi={S\bibinitperiod},
+           given={Cristina},
+           giveni={C\bibinitperiod}}}%
+        {{hash=df432ff57fd2df92c0e22f5c2cfceb18}{%
+           family={Balázs},
+           familyi={B\bibinitperiod},
+           given={Zsolt},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=add5b43f87f0930ad7103b3a7795ab3a}{%
+           family={Krauthammer},
+           familyi={K\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=22258b1b7a13aae786a27a7a6b1980c8}{%
+           family={Schwank},
+           familyi={S\bibinitperiod},
+           given={Gerald},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{57786a44903a4c73e8e7f8233ad2dc63}
+      \strng{fullhash}{d699c78c720c8a98754926f83467851f}
+      \strng{bibnamehash}{57786a44903a4c73e8e7f8233ad2dc63}
+      \strng{authorbibnamehash}{57786a44903a4c73e8e7f8233ad2dc63}
+      \strng{authornamehash}{57786a44903a4c73e8e7f8233ad2dc63}
+      \strng{authorfullhash}{d699c78c720c8a98754926f83467851f}
+      \field{extraname}{2}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1087-0156, 1546-1696}
+      \field{journaltitle}{Nature Biotechnology}
+      \field{langid}{english}
+      \field{month}{8}
+      \field{number}{8}
+      \field{shortjournal}{Nat Biotechnol}
+      \field{title}{Predicting Prime Editing Efficiency and Product Purity by Deep Learning}
+      \field{urlday}{24}
+      \field{urlmonth}{4}
+      \field{urlyear}{2024}
+      \field{volume}{41}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{1151\bibrangedash 1159}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1038/s41587-022-01613-7
+      \endverb
+      \verb{file}
+      \verb C:\Users\13954\Zotero\storage\YY5LQVQW\Schwank Gerald et al. - 2023 - Predicting prime editing efficiency and product purity by deep learning.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.nature.com/articles/s41587-022-01613-7
+      \endverb
+      \verb{url}
+      \verb https://www.nature.com/articles/s41587-022-01613-7
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

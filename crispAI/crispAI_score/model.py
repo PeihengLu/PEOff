@@ -196,9 +196,9 @@ class CrispAI_pi(nn.Module):
         x_theta = torch.exp(x_cat[:, 1]).view(-1, 1)
         x_pi = x_cat[:, 2].view(-1, 1)
 
-        # mu and theta need to be strictly positive
-        x_mu = torch.clamp(x_mu, min=self.eps)
-        x_theta = torch.clamp(x_theta, min=self.eps)
+        # # mu and theta need to be strictly positive
+        # x_mu = torch.clamp(x_mu, min=self.eps)
+        # x_theta = torch.clamp(x_theta, min=self.eps)
 
         # pi needs to be between 0 and 1
         x_pi = torch.sigmoid(x_pi)

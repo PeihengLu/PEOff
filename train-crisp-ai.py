@@ -17,7 +17,7 @@ model_config = ModelConfig()
 
 @dataclass
 class TrainingConfig:
-    batch_size: int = 64
+    batch_size: int = 256
     learning_rate: float = 0.01
     epochs: int = 100
     
