@@ -13,7 +13,8 @@ import numpy as np
 from crispAI.crispAI_score.model import CrispAI_pi, ModelConfig
 from crispAI.crispAI_score.loss_functions import ZeroInflatedNegativeBinomialLoss
 
-model_config = ModelConfig()
+# set dropout to 0 for evaluation
+model_config = ModelConfig(conv_dropout=0, lstm_dropout=0)
 
 @dataclass
 class TesingConfig:
@@ -88,9 +89,12 @@ def evaluate_crisp_ai(testing_config: TesingConfig, X_tests: Dict[int, Dict[str,
         # take the mean across the first dimension
         mean_efficiencies[fold] = np.mean(sampled_efficiencies, axis=0)
 
-        # calculate the confidence interval
-        lower_confidence[fold] = np.percentile(sampled_efficiencies, 2.5, axis=0)
-        upper_confidence[fold] = np.percentile(sampled_efficiencies, 97.5, axis=0)
+        # convert target efficiencies to numpy
+        y_tests[fold] = y_tests[fold].cpu().numpy()
+
+        # calculate the pearson and spearman correlation with the target
+        print(f"Pearson correlation: {stats.pearsonr(mean_efficiencies[fold], y_tests[fold])[0]}")
+        print(f"Spearman correlation: {stats.spearmanr(mean_efficiencies[fold], y_tests[fold])[0]}")
 
     return mean_efficiencies, lower_confidence, upper_confidence
 
@@ -105,6 +109,7 @@ def preprocess_data(data: pd.DataFrame) -> Tuple[Dict[int, Dict[str, torch.Tenso
     """    
     # TODO: split the data into folds based on uniqueindex field
     # TODO: may need to group edits on same target loci together in the future
+    # remove the entries with 0 efficiency
     data['fold'] = data['uniqueindex'] % 5
 
     # dictionaries to store the training data and labels for each fold

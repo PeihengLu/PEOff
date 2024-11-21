@@ -11,13 +11,13 @@ import scipy.stats as stats
 import numpy as np
 
 from crispAI.crispAI_score.model import CrispAI_pi, ModelConfig
-from crispAI.crispAI_score.loss_functions import ZeroInflatedNegativeBinomialLoss
+from crispAI.crispAI_score.loss_functions import ZeroInflatedNegativeBinomialLoss, MyZeroInflatedNegativeBinomialLoss
 
 model_config = ModelConfig()
 
 @dataclass
 class TrainingConfig:
-    batch_size: int = 256
+    batch_size: int = 128
     learning_rate: float = 0.01
     epochs: int = 100
     
@@ -38,7 +38,7 @@ class TrainingConfig:
     device: str = 'cuda' if torch.cuda.is_available() else 'cpu'
     
     # custom criterion using zero-inflated negative binomial
-    criterion: torch.nn.Module = ZeroInflatedNegativeBinomialLoss
+    criterion: torch.nn.Module = MyZeroInflatedNegativeBinomialLoss
     
     # adam optimizer
     optimizer: torch.optim.Optimizer = torch.optim.Adam
