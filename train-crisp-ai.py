@@ -13,7 +13,12 @@ import numpy as np
 from crispAI.crispAI_score.model import CrispAI_pi, ModelConfig
 from crispAI.crispAI_score.loss_functions import ZeroInflatedNegativeBinomialLoss, MyZeroInflatedNegativeBinomialLoss
 
-model_config = ModelConfig()
+import sys
+sys.path.append('crispAI/crispAI_score')
+
+# acquire the config
+checkpoint = torch.load('crispAI/crispAI_score/model_checkpoint/epoch:19-best_valid_loss:0.270.pt', map_location=torch.device('cuda'))
+model_config = checkpoint['config']
 
 @dataclass
 class TrainingConfig:

@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from typing import Dict, Tuple
-from os.path import join as pjoin
+from os.path import join as pjoin, exists
 
 import skorch
 from skorch import NeuralNetRegressor
@@ -14,7 +14,12 @@ from crispAI.crispAI_score.model import CrispAI_pi, ModelConfig
 from crispAI.crispAI_score.loss_functions import ZeroInflatedNegativeBinomialLoss
 
 # set dropout to 0 for evaluation
-model_config = ModelConfig(conv_dropout=0, lstm_dropout=0)
+import sys
+sys.path.append('crispAI/crispAI_score')
+
+# acquire the config from the saved model
+checkpoint = torch.load('crispAI/crispAI_score/model_checkpoint/epoch:19-best_valid_loss:0.270.pt', map_location=torch.device('cuda'))
+model_config = checkpoint['config']
 
 @dataclass
 class TesingConfig:
@@ -54,9 +59,8 @@ def evaluate_crisp_ai(testing_config: TesingConfig, X_tests: Dict[int, Dict[str,
         X_tests (Dict[int, Dict[str, torch.Tensor]]): test data for each split, where the key is the split index, and the value is a dictionary containing the input names and tensors for the forward function
         y_tests (Dict[int, torch.Tensor]): test labels for each split, where the key is the split index
     """    
-    mean_efficiencies = {}
-    lower_confidence = {}
-    upper_confidence = {}
+    pearson_correlations = {}
+    spearman_correlations = {}
     # cross validation with each fold
     for fold in X_tests.keys():
         print(f"Testing fold {fold}")
@@ -87,16 +91,31 @@ def evaluate_crisp_ai(testing_config: TesingConfig, X_tests: Dict[int, Dict[str,
 
 
         # take the mean across the first dimension
-        mean_efficiencies[fold] = np.mean(sampled_efficiencies, axis=0)
+        mean_efficiencies = np.mean(sampled_efficiencies, axis=0)
 
         # convert target efficiencies to numpy
         y_tests[fold] = y_tests[fold].cpu().numpy()
 
         # calculate the pearson and spearman correlation with the target
-        print(f"Pearson correlation: {stats.pearsonr(mean_efficiencies[fold], y_tests[fold])[0]}")
-        print(f"Spearman correlation: {stats.spearmanr(mean_efficiencies[fold], y_tests[fold])[0]}")
-
-    return mean_efficiencies, lower_confidence, upper_confidence
+        print(f"Pearson correlation: {stats.pearsonr(mean_efficiencies, y_tests[fold])[0]}")
+        print(f"Spearman correlation: {stats.spearmanr(mean_efficiencies, y_tests[fold])[0]}")
+        
+        pearson_correlations[fold] = stats.pearsonr(mean_efficiencies, y_tests[fold])[0]
+        spearman_correlations[fold] = stats.spearmanr(mean_efficiencies, y_tests[fold])[0]
+        
+    # save the pearson and spearman correlations to csv file
+    pearson_performance = pd.read_csv('data/pridict_90k_pearson.csv') if exists('data/pridict_90k_pearson.csv') else pd.DataFrame()
+    spearman_performance = pd.read_csv('data/pridict_90k_spearman.csv') if exists('data/pridict_90k_spearman.csv') else pd.DataFrame()
+    
+    # the performance files uses fold as index
+    for fold in pearson_correlations.keys():
+        pearson_performance.at[fold, 'crispAI'] = pearson_correlations[fold]
+        spearman_performance
+        spearman_performance.at[fold, 'crispAI'] = spearman_correlations[fold] 
+        
+    pearson_performance.to_csv('data/pridict_90k_pearson.csv', index=False)
+    spearman_performance.to_csv('data/pridict_90k_spearman.csv', index=False)
+            
 
 def preprocess_data(data: pd.DataFrame) -> Tuple[Dict[int, Dict[str, torch.Tensor]], Dict[int, torch.Tensor]]:
     """preprocess data for crispAI model
@@ -186,12 +205,4 @@ if __name__ == '__main__':
     testing_config.f_params = pjoin('crispAI', 'trained_models', 'pridict_params_')
     testing_config.f_best = pjoin('crispAI', 'trained_models', 'pridict_best_')
     # train the model
-    mean_efficiencies, lower_confidence, upper_confidence = evaluate_crisp_ai(testing_config, X_tests, y_tests)
-
-    output = pd.DataFrame()
-
-    # join the mean efficiencies with the corresponding uniqueid
-    for fold in mean_efficiencies.keys():
-        output = pd.concat([output, pd.DataFrame({'uniqueindex': uniqueid[fold], 'predicted_efficiency': mean_efficiencies[fold], 'lower_confidence': lower_confidence[fold], 'upper_confidence': upper_confidence[fold]})])
-    
-    output.to_csv('data/crispai-predictions.csv', index=False)
+    evaluate_crisp_ai(testing_config, X_tests, y_tests)
