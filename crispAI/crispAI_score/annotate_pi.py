@@ -110,7 +110,7 @@ def annotation_pipeline(offtarget_data: pd.DataFrame) -> pd.DataFrame:
     # align sgRNA in the middle of the context sequence
     offtarget_data.loc[offtarget_data['strand'] == '+', start_col] = offtarget_data[start_col] - offtarget_data['sgRNA_in_context_offset']
     offtarget_data.loc[offtarget_data['strand'] == '-', start_col] = offtarget_data[start_col] + offtarget_data['sgRNA_in_context_offset']
-    offtarget_data[end_col] = offtarget_data[start_col] + 22
+    # offtarget_data[end_col] = offtarget_data[start_col] + 22
 
     # remove sgRNA_in_context_offset and sgRNA_in_context columns
     offtarget_data.drop(columns=['sgRNA_in_context_offset', 'sgRNA_in_context'], inplace=True)
