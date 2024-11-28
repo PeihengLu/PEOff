@@ -62,21 +62,23 @@ def convert_pridict_to_crispai(data: pd.DataFrame, model:str = 'base') -> pd.Dat
     data['direction'] = target_strand
     data.loc[(data['direction'] == 'Fw'), 'strand'] = '+'
     data.loc[~(data['direction'] == 'Fw'), 'strand'] = '-'
+
+    length = 60 if model != 'base' else 23
     
     # use the forward or reverse of the target strand and the Editing_Position column to identify the gRNA binding region
     # the 23 bp long regions are marked with start and end columns, inclusive
-    data.loc[(data['strand'] == '+'), 'start'] = data['pos'] - (data['RTlength'] - data['RToverhanglength']) - data['PBSlength']
-    data.loc[(data['strand'] == '-'), 'start'] = data['pos'] + (data['RTlength'] - data['RToverhanglength']) + data['PBSlength'] - 22
-    data.loc[(data['strand'] == '-') & (data['Correction_Type'] == 'Insertion'), 'start'] = data['start'] + 1
-    data.loc[(data['strand'] == '-') & (data['Correction_Type'] == 'Deletion'), 'start'] = data['start'] + 1
-    data.loc[(data['strand'] == '+') & (data['Correction_Type'] == 'Insertion'), 'start'] = data['start'] - 1 + data['Correction_Length']
-    data.loc[(data['strand'] == '+') & (data['Correction_Type'] == 'Deletion'), 'start'] = data['start'] - 1 + data['Correction_Length']
+    data.loc[(data['strand'] == '+'), 'start'] = data['pos'] - (data['RTlength'] - data['RToverhanglength']) - data['PBSlength'] + 1 
+    data.loc[(data['strand'] == '-'), 'start'] = data['pos'] + (data['RTlength'] - data['RToverhanglength']) + data['PBSlength'] - length + 1 
+    # data.loc[(data['strand'] == '-') & (data['Correction_Type'] == 'Insertion'), 'start'] = data['start'] 
+    # data.loc[(data['strand'] == '-') & (data['Correction_Type'] == 'Deletion'), 'start'] = data['start']
+    # data.loc[(data['strand'] == '+') & (data['Correction_Type'] == 'Insertion'), 'start'] = data['start'] + data['Correction_Length'] - 1
+    # data.loc[(data['strand'] == '+') & (data['Correction_Type'] == 'Deletion'), 'start'] = data['start'] + data['Correction_Length'] - 1
 
     data['start'] = data['start'].astype(int)
     if model != 'base':
-        data['end'] = data['start'] + 60
+        data['end'] = data['start'] + length - 1
     else:
-        data['end'] = data['start'] + 22   
+        data['end'] = data['start'] + length - 1
 
     data['target_sequence'] = data['wide_mutated_target'].str.slice(10, 33)
     data['sgRNA_sequence'] = data['target_sequence']

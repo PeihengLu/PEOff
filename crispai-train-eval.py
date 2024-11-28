@@ -49,7 +49,7 @@ class TrainingConfig:
     # adam optimizer
     optimizer: torch.optim.Optimizer = torch.optim.Adam
     
-def train_crispAI(model: torch.nn.Module, X_trains: Dict[int, Dict[str, torch.Tensor]], y_trains: Dict[int, torch.Tensor], X_tests: Dict[int, Dict[str, torch.Tensor]], y_tests: Dict[int, torch.Tensor]) -> None:
+def train_crispAI(training_config: TrainingConfig, model: torch.nn.Module, X_trains: Dict[int, Dict[str, torch.Tensor]], y_trains: Dict[int, torch.Tensor], X_tests: Dict[int, Dict[str, torch.Tensor]], y_tests: Dict[int, torch.Tensor]) -> None:
     """train crispAI model on a set of cross validation splits
 
     Args:
@@ -90,7 +90,7 @@ def train_crispAI(model: torch.nn.Module, X_trains: Dict[int, Dict[str, torch.Te
         print(f"Fold {fold} Pearson correlation: {stats.pearsonr(y_tests[fold], y_pred)[0]}")   
         print(f"Fold {fold} Spearman correlation: {stats.spearmanr(y_tests[fold], y_pred)[0]}")     
 
-def preprocess_data(data: pd.DataFrame, mode: str = 'train', ) -> Tuple[Dict[int, Dict[str, torch.Tensor]], Dict[int, torch.Tensor], Dict[int, Dict[str, torch.Tensor]], Dict[int, torch.Tensor]]:
+def preprocess_data(data: pd.DataFrame, mode: str = 'train', model='base') -> Tuple[Dict[int, Dict[str, torch.Tensor]], Dict[int, torch.Tensor], Dict[int, Dict[str, torch.Tensor]], Dict[int, torch.Tensor]]:
     """preprocess data for crispAI model
 
     Args:
@@ -102,6 +102,7 @@ def preprocess_data(data: pd.DataFrame, mode: str = 'train', ) -> Tuple[Dict[int
     # TODO: split the data into folds based on uniqueindex field
     # TODO: may need to group edits on same target loci together in the future
     data['fold'] = data['uniqueindex'] % 5
+    seq_len = 60 if model == 'long' else 23
 
     # dictionaries to store the training data and labels for each fold
     X_trains = {}
@@ -126,8 +127,8 @@ def preprocess_data(data: pd.DataFrame, mode: str = 'train', ) -> Tuple[Dict[int
         # one hot encode the target and sgRNA sequence by taking the element wise OR between the target and sgRNA sequence
         # the final two dimensions indicating mismatch direction is unused here (because there are only perfect matches), so add two dummy rows of zeros
         X_trains[fold] = {
-            'X_nucl': np.zeros((train_data.shape[0], 23, 6)),
-            'X_pi': np.zeros((train_data.shape[0], 23, 4))
+            'X_nucl': np.zeros((train_data.shape[0], seq_len, 6)),
+            'X_pi': np.zeros((train_data.shape[0], seq_len, 4))
         }
 
         if mode == 'train':
@@ -152,8 +153,8 @@ def preprocess_data(data: pd.DataFrame, mode: str = 'train', ) -> Tuple[Dict[int
 
         # do the same for the test data
         X_tests[fold] = {
-            'X_nucl': np.zeros((test_data.shape[0], 23, 6)),
-            'X_pi': np.zeros((test_data.shape[0], 23, 4))
+            'X_nucl': np.zeros((test_data.shape[0], seq_len, 6)),
+            'X_pi': np.zeros((test_data.shape[0], seq_len, 4))
         }
 
         for i, row in test_data.iterrows():
@@ -298,16 +299,20 @@ if __name__ == '__main__':
     parser.add_argument('--model', type=str, default='base', help='model configuration to use', choices=['base', 'long'])
     parser.add_argument('--distribution', type=str, default='negative_binomial', help='distribution to use for the loss function')
     parser.add_argument('--mode', type=str, default='train', help='mode to run the script in')
+    # test flag
+    parser.add_argument('--test', action='store_true', help='flag to test the script')
     args = parser.parse_args()
     
+
     # load the data
     if args.model == 'base':
-        data = pd.read_csv('data/crispai-90k-filtered.csv')
+        data = pd.read_csv('data/crispai-90k.csv')
     elif args.model == 'long':
-        data = pd.read_csv('data/crispai-90k-filtered-long.csv')
-    else: # error
-        print('Invalid model configuration')
-        exit(1)
+        data = pd.read_csv('data/crispai-90k-long.csv')
+
+    # sample 1000 rows for testing
+    if args.test:
+        data = data.sample(1000)
 
     # preprocess the data
     X_trains, y_trains, X_tests, y_tests = preprocess_data(data, mode=args.mode)
@@ -331,7 +336,8 @@ if __name__ == '__main__':
             # TODO: update this with other distributions after a good one is decided
             training_config.criterion = torch.nn.MSELoss
         # train the model
-        train_crispAI(training_config, X_trains, y_trains, X_tests, y_tests)
+        model = CrispAI_pi(model_config)
+        train_crispAI(training_config, model, X_trains, y_trains, X_tests, y_tests)
     if args.mode == 'eval':
         # TODO: modify the config according to the cmd arguments
         # attach all data to cuda
