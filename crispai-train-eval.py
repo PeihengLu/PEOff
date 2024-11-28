@@ -295,12 +295,19 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Train crispAI model on PRIDICT dataset')
     parser.add_argument('--data', type=str, default='data/crispai-90k-filtered.csv', help='path to the PRIDICT dataset')
     parser.add_argument('--output', type=str, default='crispAI/trained_models', help='path to save the trained model')
-    parser.add_argument('--model', type=str, default='base', help='model configuration to use')
+    parser.add_argument('--model', type=str, default='base', help='model configuration to use', choices=['base', 'long'])
     parser.add_argument('--distribution', type=str, default='negative_binomial', help='distribution to use for the loss function')
     parser.add_argument('--mode', type=str, default='train', help='mode to run the script in')
     args = parser.parse_args()
+    
     # load the data
-    data = pd.read_csv('data/crispai-90k-filtered.csv')
+    if args.model == 'base':
+        data = pd.read_csv('data/crispai-90k-filtered.csv')
+    elif args.model == 'long':
+        data = pd.read_csv('data/crispai-90k-filtered-long.csv')
+    else: # error
+        print('Invalid model configuration')
+        exit(1)
 
     # preprocess the data
     X_trains, y_trains, X_tests, y_tests = preprocess_data(data, mode=args.mode)

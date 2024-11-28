@@ -28,7 +28,7 @@ def parse_hgvs(data: pd.DataFrame, genebe_annotations: pd.DataFrame) -> pd.DataF
 
     return data
 
-def convert_pridict_to_crispai(data: pd.DataFrame) -> pd.DataFrame:
+def convert_pridict_to_crispai(data: pd.DataFrame, mode:str = 'base') -> pd.DataFrame:
     # get the genebe annotations from 'data/genebe_annotations.csv'
     if os.path.exists('data/genebe_annotations.csv'):
         genebe_annotations = pd.read_csv('data/genebe_annotations.csv')
@@ -87,7 +87,10 @@ def convert_pridict_to_crispai(data: pd.DataFrame) -> pd.DataFrame:
     data.loc[(data['strand'] == '+') & (data['Correction_Type'] == 'Deletion'), 'start'] = data['start'] - 1 + data['Correction_Length']
 
     data['start'] = data['start'].astype(int)
-    data['end'] = data['start'] + 22
+    if mode != 'base':
+        data['end'] = data['start'] + 60
+    else:
+        data['end'] = data['start'] + 22   
 
     data['target_sequence'] = data['wide_mutated_target'].str.slice(10, 33)
     data['sgRNA_sequence'] = data['target_sequence']
@@ -97,6 +100,6 @@ def convert_pridict_to_crispai(data: pd.DataFrame) -> pd.DataFrame:
     # rename pe2df_percentageedited to efficiency
     data = data.rename(columns={'PE2df_percentageedited': 'efficiency'})
 
-    data = annotation_pipeline(data)
+    data = annotation_pipeline(data, mode=mode)
 
     return data

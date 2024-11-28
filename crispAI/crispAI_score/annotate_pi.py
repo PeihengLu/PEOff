@@ -24,15 +24,15 @@ Annotate off-target dataframe with physical features
     mismatch_col = 'mismatch'
 '''
 
-def bp_wise_NucleotideBDM(seq, bdm, nuc_dict):
+def bp_wise_NucleotideBDM(seq, bdm, nuc_dict, length:int = 23):
     if 'N' in seq:
         return ','.join(['NA']*23)
     
-    if len(seq) != 169:
-        return ','.join(['NA']*23)
+    # if len(seq) != 169:
+    #     return ','.join(['NA']*23)
     
     out = []
-    for i in range(23):
+    for i in range(length):
         out.append(round(bdm.bdm(np.array([nuc_dict[x] for x in seq[i: i+147]])), 2))
     out = ','.join(map(str, out))
     return out
@@ -52,7 +52,7 @@ def gc_content_flank(flank_size, sequence):
 
     return gc_content
 
-def read_nupop_output(dir, file_id):
+def read_nupop_output(dir, file_id, length:int = 23):
     with open(dir + str(file_id) + '.seq_Prediction4.txt') as f:
         df = pd.read_csv(f, sep='\t')
         df = df.to_numpy()
@@ -66,8 +66,8 @@ def read_nupop_output(dir, file_id):
                 aff = aff[-5:]
             affinity.append(aff)
             occupancy.append(occup)
-        affinity = ','.join(affinity[73:96])
-        occupancy = ','.join(occupancy[73:96])
+        affinity = ','.join(affinity[73:73+length])
+        occupancy = ','.join(occupancy[73:73+length])
 
         return occupancy, affinity
 
@@ -86,11 +86,13 @@ def get_surrounding_sequence_from_row(row, genome, flank, chrom_col, start_col, 
         return get_surrounding_sequence(row[chrom_col], row[start_col], row[end_col]+ 1, row[strand_col], genome, flank)
     
 
-def annotation_pipeline(offtarget_data: pd.DataFrame) -> pd.DataFrame:
+def annotation_pipeline(offtarget_data: pd.DataFrame, model:str='base') -> pd.DataFrame:
     import genomepy # TODO:add other reference versions
     from pybdm import BDM
 
     g = genomepy.Genome('GRCh38')
+
+    length = 23 if model == 'base' else 60
 
     # required columns in offtarget_data
     chrom_col = 'chr'
@@ -171,7 +173,7 @@ def annotation_pipeline(offtarget_data: pd.DataFrame) -> pd.DataFrame:
     
     for i in range(1, len_files+1):
         try:
-            occ, aff = read_nupop_output(nupop_output_dir, i)
+            occ, aff = read_nupop_output(nupop_output_dir, i, length=length)
             occupancies.append(occ)
             affinities.append(aff)
         except Exception as e:
@@ -199,7 +201,7 @@ def annotation_pipeline(offtarget_data: pd.DataFrame) -> pd.DataFrame:
     bdm = BDM(ndim=1, nsymbols=4)
     nuc_dict = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
 
-    offtarget_data['nucleotide BDM'] = context_sequence_flank_73.apply(lambda seq: bp_wise_NucleotideBDM(seq.upper(), bdm, nuc_dict))
+    offtarget_data['nucleotide BDM'] = context_sequence_flank_73.apply(lambda seq: bp_wise_NucleotideBDM(seq.upper(), bdm, nuc_dict, length=length))
 
     print('Nucleotide BDM annotation generated')
 

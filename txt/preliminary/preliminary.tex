@@ -25,7 +25,7 @@ The crispAI model requires the 73bp long flank sequence of the target site, whic
 
 PRIDICT provided the HGVS(Human Genome Variation Society) notation of the intended edits, as well as the direction of the target strand(forward or reverse, in relation to the reference genome). Using the given information, GeneBe was able to map the target site to the hg38 coordinates, and given the relative location of the edit to the SpCas9 target site, the precise 23 bp target site could be calculated\cite{stawinskiGenebenetImplementationValidation2024}. The flank sequence is then generated using genomepy, a Python package that acquires the reference genome sequence given the coordinates.
 
-However, around 2,000 out of 92,000 target sites were unable to be mapped to the reference genome, mostly due to GeneBe unable to recognize the HGVS notations. These target sites were removed from the datasets for the time being. 
+However, around 1,200 out of 92,000 target sites were unable to be mapped to the reference genome, mostly due to GeneBe unable to recognize the HGVS notations. These target sites were removed from the datasets for the time being. 
 
 At the same time, a large proportion of the coordinates entered were around 1-3bp off from the actual target site returned by genomepy. To adjust for this, the wide target sequence returned by genomepy was in turn used to pinpoint the exact site. With a 73bp flank sequence around the target site, the relative location of the target site should be at the 74rd bp of the wide target sequence. Using this fact, the coordinates are adjusted to ensure the perfect match between the hg38 coordinates and the SpCas9 target site.
 
@@ -45,7 +45,7 @@ The starting point of the experiment is using the base crispAI model, considerin
 
 \section{crispAI with extended input sequence}
 
-
+To accommodate the additional PBS and RTT section of the prime editors, the input sequence was extended from the original 23 bp long spanning across the sgRNA and the PAM sequence, to 60bp, covering the entire target site. This was acomplished by updating the data annotation function to move the end coordinate 59bp downstream from the start coordinate, instead of 22bp.
 
 \subsection{crispAI with extended input sequence and functional annotations}
 
