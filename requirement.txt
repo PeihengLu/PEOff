@@ -1,2 +1,5 @@
 cyvcf2
 genebe
+genomepy
+pyensembl
+pybdm

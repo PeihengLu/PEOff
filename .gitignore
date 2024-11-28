@@ -7,3 +7,5 @@ txt/proposal/._wordcount_selection.tex
 data/pridict-90k.csv
 data/crispai-90k-long.csv
 txt/preliminary/preliminary.pdf
+__pycache__/*
+*.pyc

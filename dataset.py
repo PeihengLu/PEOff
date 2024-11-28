@@ -28,7 +28,7 @@ def parse_hgvs(data: pd.DataFrame, genebe_annotations: pd.DataFrame) -> pd.DataF
 
     return data
 
-def convert_pridict_to_crispai(data: pd.DataFrame, mode:str = 'base') -> pd.DataFrame:
+def convert_pridict_to_crispai(data: pd.DataFrame, model:str = 'base') -> pd.DataFrame:
     # get the genebe annotations from 'data/genebe_annotations.csv'
     if os.path.exists('data/genebe_annotations.csv'):
         genebe_annotations = pd.read_csv('data/genebe_annotations.csv')
@@ -49,20 +49,6 @@ def convert_pridict_to_crispai(data: pd.DataFrame, mode:str = 'base') -> pd.Data
 
     # add coordinates of the edit
     data = parse_hgvs(data, genebe_annotations)
-
-    genes = data['Gene'].tolist()
-
-    ensemble = pyensembl.EnsemblRelease(111)
-
-    # for gene in genes:
-    #     try:
-    #         gene_data = ensemble.genes_by_name(gene)[0]
-    #         # print("Gene:", gene.name)
-    #         # print("Location:", gene.contig, gene.start, "-", gene.end)
-    #         strand.append(gene_data.strand)
-    #     except:
-    #         print(f"{gene} not found")
-    #         strand.append(None)
 
     target_strand = data['Target_Strand'].tolist()
     # remove the "'" from the strand
@@ -87,7 +73,7 @@ def convert_pridict_to_crispai(data: pd.DataFrame, mode:str = 'base') -> pd.Data
     data.loc[(data['strand'] == '+') & (data['Correction_Type'] == 'Deletion'), 'start'] = data['start'] - 1 + data['Correction_Length']
 
     data['start'] = data['start'].astype(int)
-    if mode != 'base':
+    if model != 'base':
         data['end'] = data['start'] + 60
     else:
         data['end'] = data['start'] + 22   
@@ -100,6 +86,6 @@ def convert_pridict_to_crispai(data: pd.DataFrame, mode:str = 'base') -> pd.Data
     # rename pe2df_percentageedited to efficiency
     data = data.rename(columns={'PE2df_percentageedited': 'efficiency'})
 
-    data = annotation_pipeline(data, mode=mode)
+    data = annotation_pipeline(data, model=model)
 
     return data

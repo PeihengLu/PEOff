@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from typing import Dict, Tuple
-from os.path import join as pjoin
+from os.path import join as pjoin, exists
 import argparse
 
 import skorch
