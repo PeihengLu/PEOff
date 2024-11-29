@@ -12,7 +12,7 @@ import scipy.stats as stats
 import numpy as np
 
 from crispAI.crispAI_score.model import CrispAI_pi, ModelConfig, CrispAI_pe
-from crispAI.crispAI_score.loss_functions import ZeroInflatedNegativeBinomialLoss, MyZeroInflatedNegativeBinomialLoss
+from crispAI.crispAI_score.loss_functions import MyZeroInflatedNegativeBinomialLoss
 
 import sys
 sys.path.append('crispAI/crispAI_score')
@@ -20,6 +20,7 @@ sys.path.append('crispAI/crispAI_score')
 # acquire the config
 checkpoint = torch.load('crispAI/crispAI_score/model_checkpoint/epoch:19-best_valid_loss:0.270.pt', map_location=torch.device('cuda'))
 model_config = checkpoint['config']
+# model_config = ModelConfig()
 
 @dataclass
 class TrainingConfig:
@@ -33,7 +34,7 @@ class TrainingConfig:
     
     # callbacks
     use_early_stopping: bool = True
-    patience: int = 10
+    patience: int = 5
     use_checkpoint: bool = True
     f_params: str = 'model_params.pt'
     f_history: str = None
@@ -84,8 +85,12 @@ def train_crispAI(training_config: TrainingConfig, model: torch.nn.Module, X_tra
         # train the model
         net.fit(X_trains[fold], y_trains[fold])
 
-        # output the test set predictions performance using pearson and spearman correlation
-        y_pred = net.predict(X_tests[fold])
+        X_tests[fold] = {key: X_tests[fold][key].to('cuda') for key in X_tests[fold].keys()}
+        
+        # calculate the mean efficiency 
+        sampled_efficiencies = net.module.draw_samples(X_tests[fold], 100)
+        mean_efficiencies = np.mean(sampled_efficiencies, axis=0)
+        y_pred = mean_efficiencies
 
         print(f"Fold {fold} Pearson correlation: {stats.pearsonr(y_tests[fold], y_pred)[0]}")   
         print(f"Fold {fold} Spearman correlation: {stats.spearmanr(y_tests[fold], y_pred)[0]}")     
@@ -102,7 +107,8 @@ def preprocess_data(data: pd.DataFrame, mode: str = 'train', model='base') -> Tu
     # TODO: split the data into folds based on uniqueindex field
     # TODO: may need to group edits on same target loci together in the future
     data['fold'] = data['uniqueindex'] % 5
-    seq_len = 60 if model == 'long' else 23
+    # sequence length
+    seq_len = 23 if model == 'base' else 60
 
     # dictionaries to store the training data and labels for each fold
     X_trains = {}
@@ -134,10 +140,21 @@ def preprocess_data(data: pd.DataFrame, mode: str = 'train', model='base') -> Tu
         if mode == 'train':
             # element wise OR between target and protospacer, in this case, is just one hot encoding the sequence
             for i, row in train_data.iterrows():
-                sequence = row['target_sequence']
+                sequence = row['context sequence flank_73'][0: seq_len]
+                sequence = sequence.upper()
 
                 for j, s in enumerate(sequence):
                     X_trains[fold]['X_nucl'][i, j, vocab[s]] = 1
+                # the last two columns is used for annotating the pbs and rt_mut location
+                if model == 'annot':
+                    pbs_loc = eval(row['pbs_loc'])
+                    rt_mut_loc = eval(row['rt_mut_loc'])
+                    # subtract 10 from the pbs_loc and rt_mut_loc to get the correct index
+                    pbs_loc = [x - 10 for x in pbs_loc]
+                    rt_mut_loc = [x - 10 for x in rt_mut_loc]
+
+                    X_trains[fold]['X_nucl'][i, pbs_loc[0]: pbs_loc[1], -2] = 1
+                    X_trains[fold]['X_nucl'][i, rt_mut_loc[0]: rt_mut_loc[1], -1] = 1
             print('One hot encoded training target and protospacer sequence')
 
             # load the Nucleotide BDM score, GC content, NuPoP occupancy score, and NuPoP affinity scores
@@ -158,11 +175,22 @@ def preprocess_data(data: pd.DataFrame, mode: str = 'train', model='base') -> Tu
         }
 
         for i, row in test_data.iterrows():
-            sequence = row['target_sequence']
-
+            sequence = row['context sequence flank_73'][0: seq_len]
+            # sequence to upper case
+            sequence = sequence.upper()
             for j, s in enumerate(sequence):
                 X_tests[fold]['X_nucl'][i, j, vocab[s]] = 1
-
+            # the last two columns is used for annotating the pbs and rt_mut location
+            if model == 'annot':
+                pbs_loc = eval(row['pbs_loc'])
+                rt_mut_loc = eval(row['rt_mut_loc'])
+                # subtract 10 from the pbs_loc and rt_mut_loc to get the correct index
+                pbs_loc = [x - 10 for x in pbs_loc]
+                rt_mut_loc = [x - 10 for x in rt_mut_loc]
+                
+                X_tests[fold]['X_nucl'][i, pbs_loc[0]: pbs_loc[1], -2] = 1
+                X_tests[fold]['X_nucl'][i, rt_mut_loc[0]: rt_mut_loc[1], -1] = 1
+                
         print('One hot encoded test target and protospacer sequence')
 
         for i, row in test_data.iterrows():
@@ -218,12 +246,12 @@ class TesingConfig:
     device: str = 'cuda' if torch.cuda.is_available() else 'cpu'
     
     # custom criterion using zero-inflated negative binomial
-    criterion: torch.nn.Module = ZeroInflatedNegativeBinomialLoss
+    criterion: torch.nn.Module = MyZeroInflatedNegativeBinomialLoss
     
     # adam optimizer
     optimizer: torch.optim.Optimizer = torch.optim.Adam
     
-def evaluate_crisp_ai(testing_config: TesingConfig, X_tests: Dict[int, Dict[str, torch.Tensor]], y_tests: Dict[int, torch.Tensor]) -> None:
+def evaluate_crisp_ai(testing_config: TesingConfig, X_tests: Dict[int, Dict[str, torch.Tensor]], y_tests: Dict[int, torch.Tensor], model:str = 'base') -> None:
     """train crispAI model on a set of cross validation splits
 
     Args:
@@ -244,14 +272,6 @@ def evaluate_crisp_ai(testing_config: TesingConfig, X_tests: Dict[int, Dict[str,
             lr=testing_config.learning_rate,
             batch_size=testing_config.batch_size,
             device='cuda',
-            train_split=skorch.dataset.ValidSplit(cv=5),
-            callbacks=[
-                EarlyStopping(patience=testing_config.patience, lower_is_better=True),
-                Checkpoint(monitor='valid_loss_best', 
-                           f_params=testing_config.f_params + f'fold_{fold}.pt' if testing_config.f_params is not None else None
-                           , f_optimizer=None, f_history=testing_config.f_history+ f'fold_{fold}.pt' if testing_config.f_history is not None else None,
-                           f_criterion=testing_config.f_criteria+ f'fold_{fold}.pt' if testing_config.f_criteria is not None else None, f_optimizer_state=None, f_criterion_state=None, f_best=testing_config.f_best + f'fold_{fold}.pt' if testing_config.f_best is not None else None)
-            ],
             criterion=testing_config.criterion,
             optimizer=testing_config.optimizer,
         )
@@ -260,10 +280,8 @@ def evaluate_crisp_ai(testing_config: TesingConfig, X_tests: Dict[int, Dict[str,
         net.load_params(f_params=testing_config.f_params + f'fold_{fold}.pt')
 
         # output the test set predictions performance using pearson and spearman correlation
-        # sample 100 times to get the measured efficiency and confidence interval
-        sampled_efficiencies = net.module.draw_samples(X_tests[fold], 100)
-
-
+        # sample 1000 times to get the measured efficiency and confidence interval
+        sampled_efficiencies = net.module.draw_samples(X_tests[fold], 2000)
         # take the mean across the first dimension
         mean_efficiencies = np.mean(sampled_efficiencies, axis=0)
 
@@ -276,16 +294,18 @@ def evaluate_crisp_ai(testing_config: TesingConfig, X_tests: Dict[int, Dict[str,
         
         pearson_correlations[fold] = stats.pearsonr(mean_efficiencies, y_tests[fold])[0]
         spearman_correlations[fold] = stats.spearmanr(mean_efficiencies, y_tests[fold])[0]
-        
+    
+    
     # save the pearson and spearman correlations to csv file
     pearson_performance = pd.read_csv('data/pridict_90k_pearson.csv') if exists('data/pridict_90k_pearson.csv') else pd.DataFrame()
     spearman_performance = pd.read_csv('data/pridict_90k_spearman.csv') if exists('data/pridict_90k_spearman.csv') else pd.DataFrame()
     
+    
     # the performance files uses fold as index
     for fold in pearson_correlations.keys():
-        pearson_performance.at[fold, 'crispAI'] = pearson_correlations[fold]
+        pearson_performance.at[fold, f'crispAI-{model}'] = pearson_correlations[fold]
         spearman_performance
-        spearman_performance.at[fold, 'crispAI'] = spearman_correlations[fold] 
+        spearman_performance.at[fold, f'crispAI-{model}'] = spearman_correlations[fold] 
         
     pearson_performance.to_csv('data/pridict_90k_pearson.csv', index=False)
     spearman_performance.to_csv('data/pridict_90k_spearman.csv', index=False)
@@ -296,26 +316,34 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Train crispAI model on PRIDICT dataset')
     parser.add_argument('--data', type=str, default='data/crispai-90k-filtered.csv', help='path to the PRIDICT dataset')
     parser.add_argument('--output', type=str, default='crispAI/trained_models', help='path to save the trained model')
-    parser.add_argument('--model', type=str, default='base', help='model configuration to use', choices=['base', 'long'])
-    parser.add_argument('--distribution', type=str, default='negative_binomial', help='distribution to use for the loss function')
-    parser.add_argument('--mode', type=str, default='train', help='mode to run the script in')
+    parser.add_argument('--model', type=str, default='base', help='model configuration to use', choices=['base', 'long', 'annot'])
+    parser.add_argument('--distribution', type=str, default='negative_binomial', help='distribution to use for the loss function', choices=['negative_binomial'])
+    parser.add_argument('--mode', type=str, default='train', help='mode to run the script in', choices=['train', 'eval'])
     # test flag
     parser.add_argument('--test', action='store_true', help='flag to test the script')
     args = parser.parse_args()
     
-
     # load the data
     if args.model == 'base':
         data = pd.read_csv('data/crispai-90k.csv')
     elif args.model == 'long':
         data = pd.read_csv('data/crispai-90k-long.csv')
+    elif args.model == 'annot':
+        data = pd.read_csv('data/crispai-90k-long.csv')
+        # load the pridict-90k data and keep the columns needed for the model
+        annot_data = pd.read_csv('data/pridict-90k.csv')
+        annot_data = annot_data[['uniqueindex', 'PBSlocation', 'RT_mutated_location']]
+        # rename the PBSlocation and RT_mutated_location columns to pbs_loc and rt_mut_loc
+        annot_data.rename(columns={'PBSlocation': 'pbs_loc', 'RT_mutated_location': 'rt_mut_loc'}, inplace=True)
+        # join the data with the annotation data
+        data = data.merge(annot_data, on='uniqueindex')
 
     # sample 1000 rows for testing
     if args.test:
         data = data.sample(1000)
 
     # preprocess the data
-    X_trains, y_trains, X_tests, y_tests = preprocess_data(data, mode=args.mode)
+    X_trains, y_trains, X_tests, y_tests = preprocess_data(data, mode=args.mode, model=args.model)
 
     if args.mode == 'train':
         training_config = TrainingConfig()
@@ -323,15 +351,20 @@ if __name__ == '__main__':
         if args.model == 'base':
             training_config.f_params = pjoin('crispAI', 'trained_models', 'pridict_params_')
             training_config.f_best = pjoin('crispAI', 'trained_models', 'pridict_best_')
-        else:
+        elif args.model == 'long':
             training_config.f_params = pjoin('crispAI', 'trained_models', 'pridict_params_long_')
             training_config.f_best = pjoin('crispAI', 'trained_models', 'pridict_best_long_')
+            
+            model_config.seq_len = 60
+        elif args.model == 'annot':
+            training_config.f_params = pjoin('crispAI', 'trained_models', 'pridict_params_annot_')
+            training_config.f_best = pjoin('crispAI', 'trained_models', 'pridict_best_annot_')
             
             model_config.seq_len = 60
             
         # distribution setting
         if args.distribution == 'negative_binomial':
-            training_config.criterion = ZeroInflatedNegativeBinomialLoss
+            training_config.criterion = MyZeroInflatedNegativeBinomialLoss
         else:
             # TODO: update this with other distributions after a good one is decided
             training_config.criterion = torch.nn.MSELoss
@@ -347,7 +380,20 @@ if __name__ == '__main__':
             y_tests[fold] = y_tests[fold].to('cuda')
 
         testing_config = TesingConfig()
-        testing_config.f_params = pjoin('crispAI', 'trained_models', 'pridict_params_')
-        testing_config.f_best = pjoin('crispAI', 'trained_models', 'pridict_best_')
+        model_config.conv_dropout = 0
+        model_config.lstm_dropout = 0
+        if args.model == 'base':
+            testing_config.f_params = pjoin('crispAI', 'trained_models', 'pridict_params_')
+            testing_config.f_best = pjoin('crispAI', 'trained_models', 'pridict_best_')
+        elif args.model == 'long':
+            testing_config.f_params = pjoin('crispAI', 'trained_models', 'pridict_params_long_')
+            testing_config.f_best = pjoin('crispAI', 'trained_models', 'pridict_best_long_')
+            
+            model_config.seq_len = 60
+        elif args.model == 'annot':
+            testing_config.f_params = pjoin('crispAI', 'trained_models', 'pridict_params_annot_')
+            testing_config.f_best = pjoin('crispAI', 'trained_models', 'pridict_best_annot_')
+            
+            model_config.seq_len = 60
         # train the model
         evaluate_crisp_ai(testing_config, X_tests, y_tests)

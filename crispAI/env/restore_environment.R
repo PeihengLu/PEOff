@@ -9,7 +9,10 @@ for (row in 1:nrow(package_info)) {
     package_info[row, "Package"], 
     version = package_info[row, "Version"],
     dependencies = TRUE,
-    repos = "http://cran.us.r-project.org"
+    # use the Tsinghua mirror while in China
+    # original us mirror: 
+    # repos = "https://cran.r-project.org"
+    repos = "https://mirrors.tuna.tsinghua.edu.cn/CRAN/"
   )
 }
 

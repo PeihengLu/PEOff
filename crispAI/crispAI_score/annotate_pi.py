@@ -112,7 +112,7 @@ def annotation_pipeline(offtarget_data: pd.DataFrame, model:str='base') -> pd.Da
     # align sgRNA in the middle of the context sequence
     offtarget_data.loc[offtarget_data['strand'] == '+', start_col] = offtarget_data[start_col] - offtarget_data['sgRNA_in_context_offset']
     offtarget_data.loc[offtarget_data['strand'] == '-', start_col] = offtarget_data[start_col] + offtarget_data['sgRNA_in_context_offset']
-    # offtarget_data[end_col] = offtarget_data[start_col] + 22
+    offtarget_data[end_col] = offtarget_data[start_col] + length - 1
 
     # remove sgRNA_in_context_offset and sgRNA_in_context columns
     offtarget_data.drop(columns=['sgRNA_in_context_offset', 'sgRNA_in_context'], inplace=True)
@@ -163,7 +163,6 @@ def annotation_pipeline(offtarget_data: pd.DataFrame, model:str='base') -> pd.Da
 
     # run nupop.R
     os.system('Rscript nupop.R > /dev/null 2>&1')
-    print(pwd)
     os.chdir(pwd)
 
     # read every file in the directory with '.txt' extension in nupop_output_temp/
