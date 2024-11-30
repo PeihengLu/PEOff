@@ -92,7 +92,7 @@ def annotation_pipeline(offtarget_data: pd.DataFrame, model:str='base') -> pd.Da
 
     g = genomepy.Genome('GRCh38')
 
-    length = 23 if model == 'base' else 60
+    seq_len = 23 if model == 'base' else 60
 
     # required columns in offtarget_data
     chrom_col = 'chr'
@@ -112,7 +112,7 @@ def annotation_pipeline(offtarget_data: pd.DataFrame, model:str='base') -> pd.Da
     # align sgRNA in the middle of the context sequence
     offtarget_data.loc[offtarget_data['strand'] == '+', start_col] = offtarget_data[start_col] - offtarget_data['sgRNA_in_context_offset']
     offtarget_data.loc[offtarget_data['strand'] == '-', start_col] = offtarget_data[start_col] + offtarget_data['sgRNA_in_context_offset']
-    offtarget_data[end_col] = offtarget_data[start_col] + length - 1
+    offtarget_data[end_col] = offtarget_data[start_col] + seq_len - 1
 
     # remove sgRNA_in_context_offset and sgRNA_in_context columns
     offtarget_data.drop(columns=['sgRNA_in_context_offset', 'sgRNA_in_context'], inplace=True)
@@ -172,7 +172,7 @@ def annotation_pipeline(offtarget_data: pd.DataFrame, model:str='base') -> pd.Da
     
     for i in range(1, len_files+1):
         try:
-            occ, aff = read_nupop_output(nupop_output_dir, i, length=length)
+            occ, aff = read_nupop_output(nupop_output_dir, i, length=seq_len)
             occupancies.append(occ)
             affinities.append(aff)
         except Exception as e:
@@ -200,7 +200,7 @@ def annotation_pipeline(offtarget_data: pd.DataFrame, model:str='base') -> pd.Da
     bdm = BDM(ndim=1, nsymbols=4)
     nuc_dict = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
 
-    offtarget_data['nucleotide BDM'] = context_sequence_flank_73.apply(lambda seq: bp_wise_NucleotideBDM(seq.upper(), bdm, nuc_dict, length=length))
+    offtarget_data['nucleotide BDM'] = context_sequence_flank_73.apply(lambda seq: bp_wise_NucleotideBDM(seq.upper(), bdm, nuc_dict, length=seq_len))
 
     print('Nucleotide BDM annotation generated')
 

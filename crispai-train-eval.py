@@ -50,7 +50,7 @@ class TrainingConfig:
     # adam optimizer
     optimizer: torch.optim.Optimizer = torch.optim.Adam
     
-def train_crispAI(training_config: TrainingConfig, model: torch.nn.Module, X_trains: Dict[int, Dict[str, torch.Tensor]], y_trains: Dict[int, torch.Tensor], X_tests: Dict[int, Dict[str, torch.Tensor]], y_tests: Dict[int, torch.Tensor]) -> None:
+def train_crispAI(training_config: TrainingConfig, X_trains: Dict[int, Dict[str, torch.Tensor]], y_trains: Dict[int, torch.Tensor], X_tests: Dict[int, Dict[str, torch.Tensor]], y_tests: Dict[int, torch.Tensor]) -> None:
     """train crispAI model on a set of cross validation splits
 
     Args:
@@ -64,7 +64,7 @@ def train_crispAI(training_config: TrainingConfig, model: torch.nn.Module, X_tra
     for fold in X_trains.keys():
         print(f"Training fold {fold}")
         net = NeuralNetRegressor(
-            model,
+            CrispAI_pi(model_config),
             max_epochs=training_config.epochs,
             lr=training_config.learning_rate,
             batch_size=training_config.batch_size,
@@ -82,18 +82,11 @@ def train_crispAI(training_config: TrainingConfig, model: torch.nn.Module, X_tra
             optimizer=training_config.optimizer,
         )
         net.initialize()
+        # initialize optimizer
+        
         # train the model
         net.fit(X_trains[fold], y_trains[fold])
-
-        X_tests[fold] = {key: X_tests[fold][key].to('cuda') for key in X_tests[fold].keys()}
         
-        # calculate the mean efficiency 
-        sampled_efficiencies = net.module.draw_samples(X_tests[fold], 100)
-        mean_efficiencies = np.mean(sampled_efficiencies, axis=0)
-        y_pred = mean_efficiencies
-
-        print(f"Fold {fold} Pearson correlation: {stats.pearsonr(y_tests[fold], y_pred)[0]}")   
-        print(f"Fold {fold} Spearman correlation: {stats.spearmanr(y_tests[fold], y_pred)[0]}")     
 
 def preprocess_data(data: pd.DataFrame, mode: str = 'train', model='base') -> Tuple[Dict[int, Dict[str, torch.Tensor]], Dict[int, torch.Tensor], Dict[int, Dict[str, torch.Tensor]], Dict[int, torch.Tensor]]:
     """preprocess data for crispAI model
@@ -369,8 +362,7 @@ if __name__ == '__main__':
             # TODO: update this with other distributions after a good one is decided
             training_config.criterion = torch.nn.MSELoss
         # train the model
-        model = CrispAI_pi(model_config)
-        train_crispAI(training_config, model, X_trains, y_trains, X_tests, y_tests)
+        train_crispAI(training_config=training_config, X_trains=X_trains, y_trains=y_trains, X_tests=X_tests, y_tests=y_tests)
     if args.mode == 'eval':
         # TODO: modify the config according to the cmd arguments
         # attach all data to cuda
@@ -396,4 +388,4 @@ if __name__ == '__main__':
             
             model_config.seq_len = 60
         # train the model
-        evaluate_crisp_ai(testing_config, X_tests, y_tests)
+        evaluate_crisp_ai(testing_config, X_tests, y_tests, model=args.model)   
