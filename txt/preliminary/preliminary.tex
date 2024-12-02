@@ -39,16 +39,15 @@ The Skorch library was used to wrap the crispAI model, and the training was cond
 
 The starting point of the experiment is using the base crispAI model, considering only the SpCas9 nicking stage of the prime editing process. The result doesn't seem compelling when compared to conventional ML models and the pridict model, with significantly lower pearson and spearman correlation(). However, when comparing with DeepSpCas9, a model that also only focuses on the SpCas9 nicking stage, the result is far superior(pearson's r of 0.2 vs 0.45).  
 
-\subsection{crispAI with updated distribution}
-
 
 
 \section{crispAI with extended input sequence}
 
-To accommodate the additional PBS and RTT section of the prime editors, the input sequence was extended from the original 23 bp long spanning across the sgRNA and the PAM sequence, to 60bp, covering the entire target site. This was acomplished by updating the data annotation function to move the end coordinate 59bp downstream from the start coordinate, instead of 22bp.
+To accommodate the additional PBS and RTT section of the prime editors, the input sequence was extended from the original 23 bp long spanning across the sgRNA and the PAM sequence, to 60bp, covering the entire target site. This was accomplished by updating the data annotation function to move the end coordinate 59bp downstream from the start coordinate, instead of 22bp.
 
 \subsection{crispAI with extended input sequence and functional annotations}
 
+Since we are working with on-target datasets, the last two columns of the input data used by crispAI for indicating mismatch direction is unusedI(because there is no mismatch). To utilize the extra space, the PBS and RTT annotation sequences were added to the input data. The functional annotations were binary sequences of 1s and 0s, indicating the presence of the corresponding nucleotide at the given position.
 
 \printbibliography
 

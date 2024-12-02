@@ -23,7 +23,14 @@ Prime editing is a novel gene editing technology that enables theoretically any 
 
 Due to its superb versatility, prime editors have the potential to cure up to 90\% of diseases resulted from genetic mutations\cite{kantorCRISPRCas9DNABaseEditing2020}. However, its clinical application is still limited by the frequently low on target efficiency and the potential off-target activity\cite{zhaoPrimeEditingAdvances2023}.
 
-My master's thesis focused on predicting the on-target activity of prime editing using ensemble learning techniques and the Transformer model to improve pegRNA guide design qualities and thus overall efficiency, and achieved state-of-the-art performance on several existing datasets. As a result, moving on to the prediction of off-target activity of prime editing is a natural next step.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{prime-editing-process.png}
+    \caption{Prime editing process}
+    \label{fig:prime-editing-process}
+\end{figure}
+
+My master's thesis focused on predicting the on-target activity of prime editing using ensemble learning techniques and the Transformer model to improve pegRNA guide design qualities and thus overall efficiency. This experience provided me with a solid foundation in the biological background of prime editing and gene editing in general, as well as a good understanding of the existing machine learning models and datasets in the field. The model produced by the thesis achieved state-of-the-art performance on several existing datasets, and can be tested using this \href{https://github.com/PeihengLu/ox-dissertation/tree/main}{link}. As a result, moving on to off-target prediction is a natural next step.
 
 A number of off-target prediction tools have been developed for CRISPR-Cas9, which makes up part of the prime editing system, while DeepPrime-Off developed via fine tuning DeepPrime on the off target sites remains as one of the few prime editing off-target prediction tools. Although the CRISPR-Cas9 system was an essential part of the prime editing system, as studies have pointed out, the reverse transcription process involving the PBS and RT sequences can also impact the off-target activity. Thus, novel tools are needed to produce more accurate predictions the off-target activity of prime editing\parencite{liangGenomewideProfilingPrime2023,yuPredictionEfficienciesDiverse2023}.
 
@@ -34,23 +41,15 @@ In addition to including off-target prediction, I also propose for a fundamental
 
 Recently, a probabilistic deep learning model, crispAI, was proposed to fit a zero inflated negative binomial distribution to the off-target activity of CRISPR-Cas9 on each potential target site\parencite{ozdenLearningQuantifyUncertainty2024}. It was able to accuracy predict the off-target activity in both minimal activity and high activity sites, often outperforming existing off target prediction tools such as CRISPRoff and CRISOT.
 
-To validate the probabilistic approach, I conducted some preliminary experiments on the on-target prediction of prime editing efficiency using the mathis et al's 90k PE2 HEK293T dataset(detail of which can be found \href{https://github.com/PeihengLu/PEOff/blob/main/txt/preliminary/preliminary.pdf}{here})\parencite{mathisPredictingPrimeEditing2023}. 
+To validate the probabilistic approach, I conducted some preliminary experiments on the on-target prediction of prime editing efficiency using the mathis et al's 90k PE2 HEK293T dataset (detail of which can be found \href{https://github.com/PeihengLu/PEOff/blob/main/txt/preliminary/preliminary.pdf}{here})\parencite{mathisPredictingPrimeEditing2023}. After some simple modifications, the crispAI was able to produce distributions with moderate positive pearson correlation with the observed editing efficiency ($\sim 0.4$), which is a promising start and lays a good foundation for further development.
+
+On top of updating the output itself, additional methods including Monte Carlo dropout\parencite{galDropoutBayesianApproximation2016}/Deep ensemble\cite{lakshminarayananSimpleScalablePredictive2017} can also be relatively easily applied to gauge the confidence of the model's prediction.
 
 
-On top of updating the output itself, additional methods including Monte Carlo dropout\parencite{galDropoutBayesianApproximation2016}/Deep ensemble can also be relatively easily applied to gauge the confidence of the model's prediction.
-
-\begin{figure}
-    \centering
-    \begin{subfigure}{0.5\textwidth}
-        \includegraphics[width=\textwidth]{prime-editing-process.png}
-        \caption{Prime editing process}
-        \label{fig:prime-editing-process}
-    \end{subfigure}
-\end{figure}
 
 Overall, with the on and off target activity of prime editing quantified, we can provide a complete overview of the outcome of using a specific pegRNA sequence on a specific target loci in a specific cell line. This should noticeably improve the safety and efficiency of prime editing, and thus accelerate its clinical application, which would be a long-term goal of my PhD research. 
 
-Last year saw the first FDA approved CRISPR therapy - Casgevy - for the treatment of sickle cell disease, which took a remarkably short time of 11 years to go from the first CRISPR-Cas9 paper to the first FDA approval\cite{CRISPRClinicalTrials}. This is highly inspiring for more advanced CRISPR technologies including base editing and prime editing, both of which have been shown to have great potential in curing genetic diseases. I am planning to make contact with various wet labs to validate the model's prediction on their prime editing experiments, understanding their needs and better incorporating this in silico guide design model into their workflow. 
+Last year saw the announcement of the first FDA approved CRISPR therapy - Casgevy - for the treatment of sickle cell disease, which took a remarkably short time of 11 years to go from the first CRISPR-Cas9 paper to the first FDA approval\cite{CRISPRClinicalTrials}. This is highly inspiring for more advanced CRISPR technologies including base editing and prime editing, both of which have been shown to have great potential in curing genetic diseases. I am planning to make contact with various wet labs to validate the model's prediction on their prime editing experiments, understanding their needs and better incorporating this in silico guide design model into their workflow. 
 
 \printbibliography
 
